@@ -11,13 +11,7 @@
             box-sizing: border-box;
             font-family: 'Poppins', 'Roboto', 'Open Sans', sans-serif;
         }
-        .top_menu {
-            display: flex;
-            align-items: center;
-            flex-direction: row-reverse; 
-            gap:10px;
-        }
-
+        
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
@@ -46,7 +40,16 @@
             align-items: center;
             
         }
-
+        .search_bar{
+            width: 300px;
+        }
+        .search_bar input{
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
         footer{
             background-color: #f4ba5e;
             color: black;
@@ -82,62 +85,32 @@
             margin-top: 10px;
             border-top:1px solid #ccc;
         }
-
-        .search_bar {
-            width: 300px;
-        }
-
-        .search_bar input {
-            width: 100%;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .icons_navigation {
+        .icons_navigation{
             display: flex;
             gap: 10px;
         }
-        .welcome {
-            height:300px;
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVo1T4XiRdHmisw0fFFP8wfF4o8wNxF9vdNw&s');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
+        .top_menu{
+            display:flex;
             align-items: center;
-            text-align: center;
+            gap: 10px;
+            flex-direction: row-reverse;
         }
-        .welcome h1 {
-            font-size:2rem;
-            font-weight: bold;
-            -webkit-text-stroke-width: 1.5px;
-            -webkit-text-stroke-color: white;
-            margin-bottom: 1rem;
-        }
-        .welcome p {
-            font-size:1.2rem;
-            -webkit-text-stroke-width: 0.75px;
-            -webkit-text-stroke-color: white;
-            margin-bottom: 1rem;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #c2a069;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #e67e22;
-        }
-        
-        
+        .nav_bar .nav_items {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+.nav_bar .nav_items li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav_bar .nav_items li a:hover {
+    color: #ecd5b1;
+}
 
     </style>
 </head>
@@ -147,18 +120,18 @@
             <div class="logo">
                 EloJob<span>Die</span>
             </div>
-            <div class="top_menu">
-                <div class="icons_navigation">
-                    <a href="#cart">Cart</a>
-                    <a href="#accont">Acount</a>
-
-                </div>
+            <div class = "top_menu">
                 <div class="search_bar">
-                    <input type="text" placeholder="Search Products and services">
+                    <input type = "text" placeholder = "Search Products and services"
+                </div>
+                <div class = "icons_navigation">
+                    <a href="#accont"> Acount
+                    </a>
+                    <a href="#cart"> Cart
+                    </a>
                 </div>
             </div>
         </div>
-        
     </header>
     <nav>
         <div class = "container_nav">
@@ -176,7 +149,7 @@
         <div class = "container_welcome">
             <h1>Welcome to EloJobDie</h1>
             <p>Your one-stop shop for all your in game problems. Quality products and realible services</p>
-            <a href="#promos" class="btn">See the promos</a>
+            <a href="#promos">See the promos</a>
         </div>
     </section>
 
