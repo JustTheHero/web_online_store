@@ -11,7 +11,6 @@
   * Product/Service Management: Administrators can create/update/read/delete (crud) new products and services. For example, they can change the stock quantity.
   * Users are able to search the desired product/service using a responsible searchbar
   * Users can navigate through different products tabs.
-  * The website include a social media and FAQ tab.
 
 ## 2. Project Description:
 
