@@ -13,6 +13,17 @@
   * Users can navigate through different products tabs.
 
 ## 2. Project Description:
+  * The functionalities being implemented are:
+     - login system for customers and administrators
+     - cart to add/remove products and confirm purchases
+     - user data storage
+     - admin permission to change prices, stock, availability
+     - searchbar for products
+     - main page for main products and separate tabs for different types of services
+
+   * futuros diagramas
+
+   * Os dados de registro dos usuários e admins serão salvos em um banco de dados.
 
 ## 3. Code Comments:
 
