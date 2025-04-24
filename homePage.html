@@ -53,6 +53,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }   
 
         footer{
@@ -63,7 +65,7 @@
         }
         .content_footer{
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             justify-content: space-between;
             margin-bottom: 30px;
             gap: 30px;
@@ -97,7 +99,8 @@
         }
 
         .search_bar {
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
         }
 
         .search_bar input {
@@ -162,6 +165,8 @@
             position: relative;
             z-index: 2;
             padding: 20px;
+            width: 100%;
+            max-width: 800px;
         }
         
         .welcome h1 {
@@ -213,12 +218,14 @@
         .logo-nav-group {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .nav_itens {
             display: flex;
             gap: 15px;
             list-style-type: none;
+            flex-wrap: wrap;
         }
         .nav_itens a {
             text-decoration: none;
@@ -268,6 +275,9 @@
             border: 1px solid #30363d;
             background-color: #21262d;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         .card_products:hover {
             transform: translateY(-10px);
@@ -283,8 +293,17 @@
             overflow: hidden;
             border-bottom: 1px solid #30363d;
         }
+        
+        .image_products img {
+            max-width: 100%;
+            height: auto;
+        }
+        
         .info_products {
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
         .title_product {
             font-size: 1.3rem;
@@ -305,39 +324,186 @@
             font-size: 0.9rem;
             background-color: #30363d;
             color: #e6e6e6;
+            margin-top: auto;
         }
         
         .card_products .btn:hover {
             background-color: #00BFFF;
             color: #0d1117;
         }
+        
+        /* Mobile menu icon */
+        .mobile_menu_icon {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+        
+        .mobile_menu_icon span {
+            width: 30px;
+            height: 3px;
+            background: #e6e6e6;
+            border-radius: 5px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .welcome h1 {
+                font-size: 2rem;
+            }
+            
+            .welcome p {
+                font-size: 1.1rem;
+            }
+            
+            .welcome {
+                height: 350px;
+            }
+            
+            .products h2 {
+                font-size: 1.8rem;
+            }
+            
+            /* Show the mobile menu icon */
+            .mobile_menu_icon {
+                display: flex;
+                margin-left: 10px;
+            }
+            
+            /* Modified header layout for mobile */
+            .container_header {
+                justify-content: space-between;
+                position: relative;
+                flex-wrap: nowrap;
+            }
+            
+            /* Left group with logo and menu button */
+            .logo-nav-group {
+                flex-direction: row;
+                width: auto;
+                margin-bottom: 0;
+                align-items: center;
+            }
+            
+            /* Right group with icons and search */
+            .top_menu {
+                width: auto;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+            }
+            
+            /* Hide the navigation by default */
+            .container_nav {
+                display: none;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: #161b22;
+                z-index: 100;
+                padding: 20px;
+                border-bottom: 2px solid #00BFFF;
+            }
+            
+            .nav_itens {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav_itens li {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .nav_itens a {
+                display: block;
+                padding: 12px;
+            }
+            
+            .show_mobile_menu {
+                display: block;
+            }
+            
+            /* Search bar adjustments */
+            .search_bar {
+                max-width: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome h1 {
+                font-size: 1.7rem;
+            }
+            .products h2 {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            /* Rearrange top menu for very small screens */
+            .top_menu {
+                order: 1;
+            }
+            
+            /* Hide search on very small screens and show with a toggle button if needed */
+            .search_bar {
+                display: none;
+            }
+            
+            /* Show search button instead */
+            .search_toggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container_header">
-            <!-- Grouped logo and navigation together -->
+            <!-- Left side: Logo and menu button -->
             <div class="logo-nav-group">
                 <div class="logo">
                     EloJob<span>Die</span>
                 </div>
-                <div class="container_nav">
-                    <ul class="nav_itens">
-                        <li><a href="#elojob">EloJob</a></li>
-                        <li><a href="#acounts">Accounts</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#coach">Coach</a></li>
-                    </ul>
-                </div>
+                <button class="mobile_menu_icon" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
+            
+            <!-- Right side: Account, Cart, Search -->
             <div class="top_menu">
                 <div class="icons_navigation">
-                    <a href="#cart">Cart</a>
                     <a href="#accont">Account</a>
+                    <a href="#cart">Cart</a>
                 </div>
                 <div class="search_bar">
-                    <input type="text" placeholder="Search Products and services">
+                    <input type="text" placeholder="Search...">
                 </div>
+            </div>
+            
+            <!-- Navigation menu (hidden on mobile until toggled) -->
+            <div class="container_nav" id="mobileMenu">
+                <ul class="nav_itens">
+                    <li><a href="#elojob">EloJob</a></li>
+                    <li><a href="#acounts">Accounts</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#coach">Coach</a></li>
+                </ul>
             </div>
         </div>
     </header>
@@ -491,5 +657,12 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('show_mobile_menu');
+        }
+    </script>
 </body>
 </html>
