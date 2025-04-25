@@ -21,9 +21,13 @@
      - searchbar for products
      - main page for main products and separate tabs for different types of services
 
-   * futuros diagramas
+   * Navigation diagram for the screen mockups:
+     <p align="center">
+      <img src="naviDiagram.png" alt="Diagram" width="400"/>
+     </p>
 
-   * Os dados de registro dos usuários e admins serão salvos em um banco de dados.
+
+   * All users data will be saved in a database
 
 ## 3. Code Comments:
 
