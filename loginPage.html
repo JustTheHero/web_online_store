@@ -333,8 +333,82 @@
             background-color: #00BFFF;
             color: #0d1117;
         }
-        
-        /* Responsive styles */
+        .container_cart {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background-color: #161b22;
+            color: #e6e6e6;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 191, 255, 0.3);
+            border: 2px solid #00BFFF;
+        }
+        .cart_items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .cart_item {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: #21262d;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .cart_total{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        .container_login {
+            width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #161b22;
+            color: #e6e6e6;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 191, 255, 0.3);
+            border: 2px solid #00BFFF;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .form_login {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .input_group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .input_group input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            background-color: #21262d;
+            color: #e6e6e6;
+            font-size: 1rem;
+        }
+        .input_group label {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .container {
+            min-height: 41.5vh;
+            background-color: #0d1117;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         @media (max-width: 1024px) {
             .grid_products {
                 grid-template-columns: repeat(3, 1fr);
@@ -490,7 +564,7 @@
             </div>
             <div class="top_menu">
                 <div class="icons_navigation">
-                    <a href="#cartPage">Cart</a>
+                    <a href="#cart">Cart</a>
                     <a href="#accont">Account</a>
                 </div>
                 <div class="search_bar">
@@ -499,110 +573,20 @@
             </div>
         </div>
     </header>
-    
-    <section class="welcome">
-        <div class="container_welcome">
-            <h1>Welcome to EloJobDie</h1>
-            <p>Your one-stop shop for all your in-game problems. Quality products and reliable services to boost your gaming experience.</p>
-            <a href="#promos" class="btn">See the promos</a>
-        </div>
-    </section>
-
-    <!-- Fixed products section structure -->
-    <section class="products">
-        <div class="container_products">
-            <h2>Products</h2>
-            <div class="grid_products">
-                <!-- Card 1 -->
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="Coach LOL">
+    <section class ="container">
+        <div class="container_login">
+            <div class="form_login">
+                <h2>Login</h2>
+                <form action="">
+                    <div class="input_group">
+                        <input type="text" placeholder="Username">
                     </div>
-                    <div class="info_products">
-                        <h3 class="title_product">Coach Lol</h3>
-                        <p class="price_product">$9.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
+                    <div class="input_group">
+                        <input type="password" placeholder="Password">
                     </div>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="Coach DOTA">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">Coach DOTA</h3>
-                        <p class="price_product">$12.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="Coach CS:GO">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">Coach CS:GO</h3>
-                        <p class="price_product">$14.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
-                
-                <!-- Card 4 -->
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="EloBoost Bronze-Silver">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">EloBoost Bronze-Silver</h3>
-                        <p class="price_product">$29.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
-                
-                <!-- Card 5 -->
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="EloBoost Silver-Gold">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">EloBoost Silver-Gold</h3>
-                        <p class="price_product">$39.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="EloBoost Gold-Platinum">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">EloBoost Gold-Platinum</h3>
-                        <p class="price_product">$49.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="EloBoost Gold-Platinum">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">EloBoost Platinum-Diamond</h3>
-                        <p class="price_product">$79.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
-                <!-- Card 8 -->
-                <div class="card_products">
-                    <div class="image_products">
-                        <img src="/api/placeholder/200/200" alt="EloBoost Diamond-Master">
-                    </div>
-                    <div class="info_products">
-                        <h3 class="title_product">EloBoost Diamond-Master</h3>
-                        <p class="price_product">$129.99</p>
-                        <a href="#add_to_cart" class="btn">Add to cart</a>
-                    </div>
-                </div>
+                    <button class="btn">Login</button>
+                    <button class="btn">Register</button>
+                </form>
             </div>
         </div>
     </section>
