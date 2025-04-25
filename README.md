@@ -23,7 +23,7 @@
 
    * Navigation diagram for the screen mockups:
      <p align="center">
-      <img src="naviDiagram.png" alt="Diagram" width="400"/>
+      <img src="naviDiagram.png" alt="Diagram"/>
      </p>
 
 
