@@ -35,6 +35,17 @@
      <p>
       <img src="searchResult.png" alt="Search"/>
      </p>
+
+   * Mockup for the payment page
+     <p>
+      <img src="orderPage.png" alt="Order"/>
+     </p>
+
+   * Mockup for the confirmed purchase page
+     <p>
+      <img src="confirmedPage.png" alt="Confirmed"/>
+     </p>
+     
    * All users data will be saved in a database
 
 ## 3. Code Comments:
