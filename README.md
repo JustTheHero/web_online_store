@@ -1,8 +1,8 @@
 # SCC0219 - Introdução ao Desenvolvimento Web <br/>
 
-# PROJECT REPORT:
--> Gabriel Hyppolito - NUSP 14571810
--> Juan Marques Jordão - NUSP 14758742
+# PROJECT REPORT: ElojobDie
+-> Gabriel Hyppolito - NUSP 14571810 </br>
+-> Juan Marques Jordão - NUSP 14758742 </br>
 
 ## 1. Requirements:
   * The project is a online store system that sells accounts, online coaching sessions and services to increase your rank in online games.
