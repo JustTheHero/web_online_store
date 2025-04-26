@@ -26,6 +26,10 @@
       <img src="naviDiagram.png" alt="Diagram"/>
      </p>
 
+   * Mockup for the Product Details Page
+     <p>
+      <img src="prodDetails.png" alt="Details"/>
+     </p>
 
    * All users data will be saved in a database
 
