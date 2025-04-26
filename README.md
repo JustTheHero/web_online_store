@@ -1,6 +1,6 @@
 # SCC0219 - Introdução ao Desenvolvimento Web <br/>
 
-# PROJECT REPORT: ElojobDie
+# Project Report: ElojobDie
 -> Gabriel Hyppolito - NUSP 14571810 </br>
 -> Juan Marques Jordão - NUSP 14758742 </br>
 
