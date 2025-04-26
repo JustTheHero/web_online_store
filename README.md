@@ -33,7 +33,7 @@
 
    * Mockup for the page that shows the compatible results of a search made by the user
      <p>
-      <img src="searchResults.png" alt="Search"/>
+      <img src="searchResult.png" alt="Search"/>
      </p>
    * All users data will be saved in a database
 
