@@ -55,6 +55,7 @@
 ## 3. Code Comments:
 
 ## 4. Test Plan:
+* Back-end funcionalitites will be tested using Postman.
 
 ## 5. Test Results:
 
