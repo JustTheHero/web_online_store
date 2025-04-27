@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EloJobDie</title>
+    <meta charset="UTF-8"> <!-- Character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport configuration -->
+    <title>EloJobDie</title> <!-- Website title that appears in browser tab -->
+    <!-- Google Fonts imports for Orbitron and Exo 2 fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Reset default browser styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Exo 2', 'Roboto', 'Open Sans', sans-serif;
         }
+        
+        /* Top menu layout with reversed row direction */
         .top_menu {
             display: flex;
             align-items: center;
@@ -21,6 +25,7 @@
             flex-direction: row-reverse;
         }
 
+        /* Logo styling with futuristic font */
         .logo {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
@@ -28,14 +33,20 @@
             align-items: center;
             font-weight: bold;
         }
+        
+        /* Blue highlight color for logo with glow effect */
         .logo span {
             color: #00BFFF;
             text-shadow: 0 0 5px rgba(0, 191, 255, 0.7);
         }
+        
+        /* Dark theme background for body */
         body{
             background-color: #0d1117;
             color: #e6e6e6;
         }
+        
+        /* Header styling with shadow and border effect */
         header{
             background-color: #161b22;
             color: #e6e6e6;
@@ -43,12 +54,15 @@
             box-shadow: 0 2px 15px rgba(0, 191, 255, 0.3);
             border-bottom: 2px solid #00BFFF;
         }
+        
+        /* Container for footer with maximum width */
         .container_footer {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
+        /* Flexible header container with spacing */
         .container_header {
             display: flex;
             justify-content: space-between;
@@ -59,12 +73,15 @@
             margin: 0 auto;
         }   
 
+        /* Footer styling with blue top border */
         footer{
             background-color: #161b22;
             color: #e6e6e6;
             padding: 1.5rem;
             border-top: 2px solid #00BFFF;
         }
+        
+        /* Grid layout for footer content */
         .content_footer{
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -72,27 +89,39 @@
             margin-bottom: 30px;
             gap: 30px;
         }
+        
+        /* Heading style for footer columns */
         .col_footer h3{
             margin-bottom: 15px;
             font-size: 1.2rem;
             font-family: 'Orbitron', sans-serif;
             color: #00BFFF;
         }
+        
+        /* Remove bullet points from footer lists */
         .col_footer ul{
             list-style-type: none;
         }
+        
+        /* Spacing between footer list items */
         .col_footer ul li{
             margin-bottom: 8px;
         }
+        
+        /* Footer link styling with hover transition */
         .col_footer a{
             text-decoration: none;
             color: #e6e6e6;
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
+        
+        /* Hover effect for footer links */
         .col_footer a:hover{
             color: #00BFFF;
             text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
         }
+        
+        /* Bottom footer section with border */
         .bottom_footer{
             text-align: center;
             margin-top: 20px;
@@ -100,11 +129,13 @@
             border-top: 1px solid #2d333b;
         }
 
+        /* Search bar width constraints */
         .search_bar {
             width: 100%;
             max-width: 300px;
         }
 
+        /* Search input styling with transitions */
         .search_bar input {
             width: 100%;
             padding: 0.5rem;
@@ -117,76 +148,33 @@
             transition: all 0.3s ease;
         }
         
+        /* Focus state for search input */
         .search_bar input:focus {
             outline: none;
             border-color: #00BFFF;
             box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
         }
 
+        /* Navigation icons container */
         .icons_navigation {
             display: flex;
             gap: 15px;
         }
         
+        /* Navigation icon link styling */
         .icons_navigation a {
             color: #e6e6e6;
             text-decoration: none;
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
         
+        /* Hover effect for navigation icons */
         .icons_navigation a:hover {
             color: #00BFFF;
             text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
         }
         
-        .welcome {
-            height: 400px;
-            background-image: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVo1T4XiRdHmisw0fFFP8wfF4o8wNxF9vdNw&s');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .welcome::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, transparent 30%, #0d1117 90%);
-            z-index: 1;
-        }
-        
-        .container_welcome {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
-        
-        .welcome h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
-        }
-        .welcome p {
-            font-size: 1.3rem;
-            color: #e6e6e6;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        /* Button styling with transitions */
         .btn {
             display: inline-block;
             background-color: #00BFFF;
@@ -202,6 +190,7 @@
             font-size: 0.9rem;
         }
         
+        /* Hover effect for buttons */
         .btn:hover {
             background-color: transparent;
             color: #00BFFF;
@@ -209,26 +198,29 @@
             box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
         }
         
-        /* Updated navigation container */
+        /* Navigation container with left margin */
         .container_nav {
             display: flex;
             align-items: center;
             margin-left: 30px;
         }
         
-        /* Updated header layout to group logo and nav together */
+        /* Group for logo and navigation */
         .logo-nav-group {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
         }
         
+        /* Navigation items layout */
         .nav_itens {
             display: flex;
             gap: 15px;
             list-style-type: none;
             flex-wrap: wrap;
         }
+        
+        /* Navigation link styling */
         .nav_itens a {
             text-decoration: none;
             color: #e6e6e6;
@@ -238,101 +230,15 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
+        
+        /* Hover effect for navigation links */
         .nav_itens a:hover {
             background-color: rgba(0, 191, 255, 0.1);
             color: #00BFFF;
             text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
         }
-        /* Fixed products section styles */
-        .products {
-            padding: 70px 0;
-            background-color: #1a1f28;
-            background-image: radial-gradient(circle at top right, #152238 0%, transparent 70%), 
-                             radial-gradient(circle at bottom left, #241838 0%, transparent 70%);
-        }
-        .container_products {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .products h2 {
-            margin-bottom: 40px;
-            text-align: center;
-            color: #00BFFF;
-            font-size: 2.2rem;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
-        }
-        .grid_products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .card_products {
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid #30363d;
-            background-color: #21262d;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .card_products:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 191, 255, 0.3);
-            border-color: #00BFFF;
-        }
-        .image_products {
-            height: 200px;
-            background-color: #1a1f28;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-bottom: 1px solid #30363d;
-        }
         
-        .image_products img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .info_products {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .title_product {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: #e6e6e6;
-            font-family: 'Orbitron', sans-serif;
-        }
-        .price_product {
-            font-size: 1.4rem;
-            margin-bottom: 1.2rem;
-            color: #00BFFF;
-            font-weight: bold;
-        }
-        
-        .card_products .btn {
-            width: 100%;
-            text-align: center;
-            font-size: 0.9rem;
-            background-color: #30363d;
-            color: #e6e6e6;
-            margin-top: auto;
-        }
-        
-        .card_products .btn:hover {
-            background-color: #00BFFF;
-            color: #0d1117;
-        }
+        /* Cart container with shadow and border effects */
         .container_cart {
             max-width: 1200px;
             margin: 0 auto;
@@ -343,11 +249,15 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 191, 255, 0.3);
             border: 2px solid #00BFFF;
         }
+        
+        /* Grid layout for cart items */
         .cart_items {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
         }
+        
+        /* Individual cart item styling */
         .cart_item {
             display: flex;
             flex-direction: column;
@@ -357,6 +267,8 @@
             padding: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+        
+        /* Cart total section layout */
         .cart_total{
             display: flex;
             justify-content: space-between;
@@ -364,13 +276,7 @@
             margin-top: 1.5rem;
         }
         
-        /* Responsive styles */
-        @media (max-width: 1024px) {
-            .grid_products {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
+        /* Responsive design for screens under 900px */
         @media (max-width: 900px) {
             .container_header {
                 justify-content: center;
@@ -398,28 +304,14 @@
                 justify-content: center;
             }
             
-            .grid_products {
+            /* Change cart to 2 columns on smaller screens */
+            .cart_items {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
         
+        /* Responsive design for screens under 768px */
         @media (max-width: 768px) {
-            .welcome h1 {
-                font-size: 2rem;
-            }
-            
-            .welcome p {
-                font-size: 1.1rem;
-            }
-            
-            .welcome {
-                height: 350px;
-            }
-            
-            .products h2 {
-                font-size: 1.8rem;
-            }
-            
             .container_nav {
                 width: 100%;
                 background-color: #161b22;
@@ -458,17 +350,8 @@
             }
         }
         
+        /* Responsive design for screens under 600px */
         @media (max-width: 600px) {
-            .grid_products {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            
-            .welcome {
-                height: 300px;
-            }
-            
             .content_footer {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -484,31 +367,31 @@
             .col_footer li {
                 margin-bottom: 0;
             }
+            
+            /* Single column layout for cart on very small screens */
+            .cart_items {
+                grid-template-columns: 1fr;
+            }
         }
         
+        /* Responsive design for screens under 480px */
         @media (max-width: 480px) {
-            .welcome h1 {
-                font-size: 1.7rem;
-            }
-            
-            .products h2 {
-                font-size: 1.5rem;
-            }
-            
             .logo {
-                font-size: 1.5rem;
+                font-size: 1.5rem; /* Smaller logo on tiny screens */
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header section with navigation -->
     <header>
         <div class="container_header">
-            <!-- Grouped logo and navigation together -->
             <div class="logo-nav-group">
+                <!-- Website logo with highlighted text -->
                 <div class="logo">
                     EloJob<span>Die</span>
                 </div>
+                <!-- Main navigation menu -->
                 <div class="container_nav">
                     <ul class="nav_itens">
                         <li><a href="#elojob">EloJob</a></li>
@@ -518,6 +401,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- Top menu with search and account links -->
             <div class="top_menu">
                 <div class="icons_navigation">
                     <a href="#cart">Cart</a>
@@ -529,10 +413,14 @@
             </div>
         </div>
     </header>
+    
+    <!-- Main cart section -->
     <section>
         <div class="container_cart">
             <h2>Cart</h2>
+            <!-- Grid of cart items -->
             <div class="cart_items">
+                <!-- Individual cart item -->
                 <div class="cart_item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVo1T4XiRdHmisw0fFFP8wfF4o8wNxF9vdNw&s" alt="Product">
                     <div class="cart_item_info">
@@ -542,6 +430,7 @@
                     </div>
                     <button class="btn">Remove</button>
                 </div>
+                <!-- Repeated cart items -->
                 <div class="cart_item">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVo1T4XiRdHmisw0fFFP8wfF4o8wNxF9vdNw&s" alt="Product">
                     <div class="cart_item_info">
@@ -570,6 +459,7 @@
                     <button class="btn">Remove</button>
                 </div>
             </div>
+            <!-- Cart total and checkout button -->
             <div class="cart_total">
                 <h3>Total: $40.00</h3>
                 <button class="btn">Checkout</button>
@@ -577,9 +467,11 @@
         </div>
     </section>
     
+    <!-- Footer with multiple columns -->
     <footer>
         <div class="container_footer">
             <div class="content_footer">
+                <!-- Footer navigation columns -->
                 <div class="col_footer">
                     <h3>EloJobDie</h3>
                     <ul>
@@ -587,14 +479,6 @@
                         <li><a href="#acounts">Accounts</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#coach">Coach</a></li>
-                    </ul>
-                </div>
-                <div class="col_footer">
-                    <h3>About Us</h3>
-                    <ul>
-                        <li><a href="#history">Our History</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#press">Press</a></li>
                     </ul>
                 </div>
                 <div class="col_footer">
@@ -614,6 +498,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- Copyright information -->
             <div class="bottom_footer">
                 <p>&copy; 2025 EloJobDie. All rights reserved.</p>
             </div>
