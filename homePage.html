@@ -209,14 +209,12 @@
             box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
         }
         
-        /* Updated navigation container */
         .container_nav {
             display: flex;
             align-items: center;
             margin-left: 30px;
         }
         
-        /* Updated header layout to group logo and nav together */
         .logo-nav-group {
             display: flex;
             align-items: center;
@@ -243,7 +241,7 @@
             color: #00BFFF;
             text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
         }
-        /* Fixed products section styles */
+        
         .products {
             padding: 70px 0;
             background-color: #1a1f28;
@@ -334,7 +332,6 @@
             color: #0d1117;
         }
         
-        /* Responsive styles */
         @media (max-width: 1024px) {
             .grid_products {
                 grid-template-columns: repeat(3, 1fr);
@@ -472,13 +469,14 @@
     </style>
 </head>
 <body>
+    <!--Header of the site containing the logo, products categories, searchbar, cart and account-->
     <header>
         <div class="container_header">
-            <!-- Grouped logo and navigation together -->
             <div class="logo-nav-group">
                 <div class="logo">
                     EloJob<span>Die</span>
                 </div>
+                <!--Div separation for adaptation of the header in different devices-->
                 <div class="container_nav">
                     <ul class="nav_itens">
                         <li><a href="#elojob">EloJob</a></li>
@@ -488,6 +486,7 @@
                     </ul>
                 </div>
             </div>
+            <!--Div for cart and user account-->
             <div class="top_menu">
                 <div class="icons_navigation">
                     <a href="#cartPage">Cart</a>
@@ -500,6 +499,7 @@
         </div>
     </header>
     
+    <!--Secao inicial de bem-vindo e botao de promocoes-->
     <section class="welcome">
         <div class="container_welcome">
             <h1>Welcome to EloJobDie</h1>
@@ -508,12 +508,15 @@
         </div>
     </section>
 
-    <!-- Fixed products section structure -->
+    <!--Secao de produtos-->
     <section class="products">
         <div class="container_products">
             <h2>Products</h2>
+
+            <!--Different grids using the same structure for examples of the products for sell-->
+            <!--The main page will show 8 products in 2 rows and 4 columns-->
+
             <div class="grid_products">
-                <!-- Card 1 -->
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="Coach LOL">
@@ -525,7 +528,6 @@
                     </div>
                 </div>
                 
-                <!-- Card 2 -->
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="Coach DOTA">
@@ -537,7 +539,6 @@
                     </div>
                 </div>
                 
-                <!-- Card 3 -->
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="Coach CS:GO">
@@ -549,7 +550,6 @@
                     </div>
                 </div>
                 
-                <!-- Card 4 -->
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="EloBoost Bronze-Silver">
@@ -561,7 +561,6 @@
                     </div>
                 </div>
                 
-                <!-- Card 5 -->
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="EloBoost Silver-Gold">
@@ -572,6 +571,7 @@
                         <a href="#add_to_cart" class="btn">Add to cart</a>
                     </div>
                 </div>
+
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="EloBoost Gold-Platinum">
@@ -582,6 +582,7 @@
                         <a href="#add_to_cart" class="btn">Add to cart</a>
                     </div>
                 </div>
+
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="EloBoost Gold-Platinum">
@@ -592,7 +593,7 @@
                         <a href="#add_to_cart" class="btn">Add to cart</a>
                     </div>
                 </div>
-                <!-- Card 8 -->
+
                 <div class="card_products">
                     <div class="image_products">
                         <img src="/api/placeholder/200/200" alt="EloBoost Diamond-Master">
@@ -607,6 +608,8 @@
         </div>
     </section>
     
+
+    <!--Footer section for socials, contacts, FAQ's, displayed in different columns-->
     <footer>
         <div class="container_footer">
             <div class="content_footer">
@@ -617,14 +620,6 @@
                         <li><a href="#acounts">Accounts</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#coach">Coach</a></li>
-                    </ul>
-                </div>
-                <div class="col_footer">
-                    <h3>About Us</h3>
-                    <ul>
-                        <li><a href="#history">Our History</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#press">Press</a></li>
                     </ul>
                 </div>
                 <div class="col_footer">
