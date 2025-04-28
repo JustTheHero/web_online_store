@@ -32,22 +32,22 @@
 
    * Mockup for the Product Details Page:
      <p>
-      <img src="prodDetails.png" alt="Details"/>
+      <img src="Prototypes/prodDetails.png" alt="Details"/>
      </p>
 
    * Mockup for the page showing search results based on the user's query:
      <p>
-      <img src="searchResult.png" alt="Search"/>
+      <img src="Prototypes/searchResult.png" alt="Search"/>
      </p>
 
    * Mockup for the payment page:
      <p>
-      <img src="orderPage.png" alt="Order"/>
+      <img src="Prototypes/orderPage.png" alt="Order"/>
      </p>
 
    * Mockup for the confirmed purchase page:
      <p>
-      <img src="confirmedPage.png" alt="Confirmed"/>
+      <img src="Prototypes/confirmedPage.png" alt="Confirmed"/>
      </p>
      
    * All data related to storage, products, and users will be saved on a server.
