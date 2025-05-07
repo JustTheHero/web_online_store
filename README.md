@@ -27,7 +27,7 @@
 
    * Navigation diagram (SPA) for the screen mockups:
      <p align="center">
-      <img src="Prototypes/naviDiagram.png" alt="Diagram"/>
+      <img src="Prototypes/naviDiagram.png" alt="NavDiagram"/>
      </p>
 
    * Mockup for the Product Details Page:
