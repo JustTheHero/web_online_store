@@ -28,7 +28,7 @@
    * Navigation diagram (SPA) for the screen mockups:
      <p align="center">
       <img src="Prototypes/diagrama.png" alt="Diagrama"/>
-     
+     </p>
 
    * Mockup for the Product Details Page:
      <p>
@@ -57,7 +57,7 @@
 
    * Mockup for the User Account page:
      <p>
-      <img src="Prototypes/userAccount.png" alt="Account"/>
+      <img src="Prototypes/UserAccount.png" alt="Account"/>
      </p>
 
    * Mockup for the User Management page:
@@ -67,7 +67,7 @@
 
    * Mockup for the Storage page:
      <p>
-      <img src="Prototypes/Storage.png" alt="Storage"/>
+      <img src="Prototypes/storagePage.png" alt="Storage"/>
      </p>
      
    * All data related to storage, products, and users will be saved on a server.
