@@ -9,7 +9,7 @@
   * The system authentication will support 2 types of users:
       - Administrators, responsible for registering/managing administrators, customers, and the products/services provided. The application comes with a default admin account (username: admin, password: admin).
       - Customers, users who access the system to purchase services/products.
-  * Each customer and user record includes fields for name, email, address, phone number, and ID.
+  * Each customer and user record includes fields for name, email, phone number, discord username and ID.
   * Each service/product record includes fields for name, ID, photo, description, price, quantity in stock, and quantity sold.
   * Selling Products (or Services): Products are selected, quantities are chosen, and added to a cart. Products are purchased using a credit card number (any number is accepted by the system). The quantity sold is subtracted from the stock and added to the total quantity sold. Carts are emptied only upon payment or by the customer.
   * Product/Service Management: Administrators can create, read, update, and delete (CRUD) products and services. For example, they can change stock quantities.
