@@ -49,6 +49,26 @@
      <p>
       <img src="Prototypes/confirmedPage.png" alt="Confirmed"/>
      </p>
+
+   * Mockup for the Register page:
+     <p>
+      <img src="Prototypes/registerPage.png" alt="Register"/>
+     </p>
+
+   * Mockup for the User Account page:
+     <p>
+      <img src="Prototypes/userAccount.png" alt="Account"/>
+     </p>
+
+   * Mockup for the User Management page:
+     <p>
+      <img src="Prototypes/userManagement.png" alt="Management"/>
+     </p>
+
+   * Mockup for the Storage page:
+     <p>
+      <img src="Prototypes/Storage.png" alt="Storage"/>
+     </p>
      
    * All data related to storage, products, and users will be saved on a server.
 
