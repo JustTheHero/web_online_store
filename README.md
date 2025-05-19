@@ -27,7 +27,7 @@
 
    * Navigation diagram (SPA) for the screen mockups:
      <p>
-      <img src="https://github.com/JustTheHero/web_online_store/blob/main/Prototypes/diagrama.png" alt="diagrama">
+      <img src="Prototypes/diagrama.png" alt="diagrama">
      </p>
 
    * Mockup for the Product Details Page:
