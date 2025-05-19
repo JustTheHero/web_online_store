@@ -26,7 +26,9 @@
      - Main page showcasing featured products and separate tabs for different types of services.
 
    * Navigation diagram (SPA) for the screen mockups:
-     https://github.com/JustTheHero/web_online_store/blob/main/Prototypes/diagrama.png
+     <p>
+      <img src="https://github.com/JustTheHero/web_online_store/blob/main/Prototypes/diagrama.png" alt="diagrama">
+     </p>
 
    * Mockup for the Product Details Page:
      <p>
