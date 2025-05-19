@@ -32,7 +32,7 @@
 
    * Mockup for the Product Details Page:
      <p>
-      <img src="Prototypes/prodDetails.png" alt="Details"/>
+      <img src="Prototypes/prodetails.png" alt="Details"/>
      </p>
 
    * Mockup for the page showing search results based on the user's query:
