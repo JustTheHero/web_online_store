@@ -50,7 +50,10 @@
       <img src="Prototypes/confirmedPage.png" alt="Confirmed"/>
      </p>
 
-   
+   * Mockup for the Register page:
+     <p>
+      <img src="Prototypes/registerPage.png" alt="Register"/>
+     </p>
 
    * Mockup for the User Account page:
      <p>
