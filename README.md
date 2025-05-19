@@ -25,7 +25,50 @@
      - Search bar for products.
      - Main page showcasing featured products and separate tabs for different types of services.
 
-   
+   * Navigation diagram (SPA) for the screen mockups:
+     <p align="center">
+      <img src="Prototypes/diagrama.png" alt="Diagrama"/>
+     </p>
+
+   * Mockup for the Product Details Page:
+     <p>
+      <img src="Prototypes/prodDetails.png" alt="Details"/>
+     </p>
+
+   * Mockup for the page showing search results based on the user's query:
+     <p>
+      <img src="Prototypes/searchResult.png" alt="Search"/>
+     </p>
+
+   * Mockup for the payment page:
+     <p>
+      <img src="Prototypes/orderPage.png" alt="Order"/>
+     </p>
+
+   * Mockup for the confirmed purchase page:
+     <p>
+      <img src="Prototypes/confirmedPage.png" alt="Confirmed"/>
+     </p>
+
+   * Mockup for the Register page:
+     <p>
+      <img src="Prototypes/registerPage.png" alt="Register"/>
+     </p>
+
+   * Mockup for the User Account page:
+     <p>
+      <img src="Prototypes/UserAccount.png" alt="Account"/>
+     </p>
+
+   * Mockup for the User Management page:
+     <p>
+      <img src="Prototypes/userManagement.png" alt="Management"/>
+     </p>
+
+   * Mockup for the Storage page:
+     <p>
+      <img src="Prototypes/storagePage.png" alt="Storage"/>
+     </p>
      
    * All data related to storage, products, and users will be saved on a server.
 
