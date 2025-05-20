@@ -27,12 +27,6 @@ const ProductDescription = () => {
   };
 
   const handleAddToCart = () => {
-    // Aqui você implementaria a lógica para adicionar ao carrinho
-    // Por exemplo, disparar uma ação do Redux ou atualizar um Context
-    alert(`Adicionado ao carrinho: ${quantity} x ${product.name}`);
-    
-    // Navegar para o carrinho após adicionar
-    navigate('/cart');
   };
 
   const handleGoBack = () => {

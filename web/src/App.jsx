@@ -7,6 +7,7 @@ import Footer from './components/footer.jsx';
 import Cart from './components/cart.jsx';
 import ProductDescription from './components/productDescription.jsx';
 import Payment from './components/payment.jsx';
+import Confirmation from './components/confirmation.jsx';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/product/:id" element={<ProductDescription />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/confirmation" element={<Confirmation />} />
           </Routes>
         </main>
         <Footer />
