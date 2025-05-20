@@ -1,22 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-  const { title, price, image } = product;
+  const { id, title, price, image } = product;
+  const navigate = useNavigate();
   
-  const handleAddToCart = () => {
-    console.log(`Product "${title}" added to cart`);
-    // Implement add to cart functionality here
+  const handleProductClick = () => {
+    navigate(`/product/${id}`);
   };
-  
+
   return (
-    <div className="card_products">
+    <div className="card_products" onClick={handleProductClick}>
       <div className="image_products">
         <img src={image} alt={title} />
       </div>
       <div className="info_products">
         <h3 className="title_product">{title}</h3>
         <p className="price_product">${price.toFixed(2)}</p>
-        <button onClick={handleAddToCart} className="btn">Add to cart</button>
       </div>
     </div>
   );

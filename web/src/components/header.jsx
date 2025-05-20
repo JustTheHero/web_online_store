@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
   
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -19,7 +21,7 @@ const Header = () => {
       <div className="container_header">
         <div className="logo-nav-group">
           <div className="logo">
-            EloJob<span>Die</span>
+            <Link to="/">EloJob<span>Die</span></Link>
           </div>
           <div className="container_nav">
             <ul className="nav_itens">
@@ -32,7 +34,7 @@ const Header = () => {
         </div>
         <div className="top_menu">
           <div className="icons_navigation">
-            <a href="#cartPage">Cart</a>
+            <Link to="/cart">Cart</Link>
             <a href="#account">Account</a>
           </div>
           <div className="search_bar">
