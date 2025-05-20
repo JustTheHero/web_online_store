@@ -1,0 +1,132 @@
+/* Register.css */
+.register-container {
+    min-height: 100vh;
+    background-color: #0A2342;
+    padding: 3rem 1rem;
+  }
+  
+  .register-wrapper {
+    margin: 0 auto;
+    max-width: 28rem;
+  }
+  
+  .card {
+    background-color: #1F4068;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card-header {
+    padding: 1.5rem 1.5rem 0.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    color: #4FD3E6;
+    margin: 0;
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .input-label {
+    color: #d1d5db;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    background-color: #162B45;
+    border: 1px solid rgba(79, 211, 230, 0.3);
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+  
+  .input-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background-color: rgba(79, 211, 230, 0.1);
+  }
+  
+  .input-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #4FD3E6;
+  }
+  
+  .input-field {
+    flex: 1;
+    border: 0;
+    background-color: transparent;
+    color: white;
+    padding: 0.75rem;
+    outline: none;
+    width: 100%;
+  }
+  
+  .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .input-field:focus {
+    outline: none;
+  }
+  
+  .password-toggle {
+    padding: 0 0.75rem;
+    color: #4FD3E6;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-toggle:hover {
+    color: #7ADCE6;
+  }
+  
+  .toggle-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .card-footer {
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .submit-button {
+    width: 100%;
+    background-color: #4FD3E6;
+    color: #0A2342;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 1.5rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .submit-button:hover {
+    background-color: #7ADCE6;
+  }
