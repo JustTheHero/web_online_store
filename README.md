@@ -9,7 +9,7 @@
   * The system authentication will support 2 types of users:
       - Administrators, responsible for registering/managing administrators, customers, and the products/services provided. The application comes with a default admin account (username: admin, password: admin).
       - Customers, users who access the system to purchase services/products.
-  * Each customer and user record includes fields for name, email, address, phone number, and ID.
+  * Each customer and user record includes fields for name, email, phone number, discord username and ID.
   * Each service/product record includes fields for name, ID, photo, description, price, quantity in stock, and quantity sold.
   * Selling Products (or Services): Products are selected, quantities are chosen, and added to a cart. Products are purchased using a credit card number (any number is accepted by the system). The quantity sold is subtracted from the stock and added to the total quantity sold. Carts are emptied only upon payment or by the customer.
   * Product/Service Management: Administrators can create, read, update, and delete (CRUD) products and services. For example, they can change stock quantities.
@@ -25,29 +25,49 @@
      - Search bar for products.
      - Main page showcasing featured products and separate tabs for different types of services.
 
-   * Navigation diagram (SPA) for the screen mockups:
-     <p align="center">
-      <img src="naviDiagram.png" alt="Diagram"/>
+    * Navigation diagram (SPA) for the screen mockups:
+     <p>
+      <img src="Prototypes/diagrama.png" alt="diagrama">
      </p>
 
-   * Mockup for the Product Details Page:
+    * Mockup for the Product Details Page:
      <p>
-      <img src="prodDetails.png" alt="Details"/>
+      <img src="Prototypes/prodDetails.png" alt="Details"/>
      </p>
 
-   * Mockup for the page showing search results based on the user's query:
+    * Mockup for the page showing search results based on the user's query:
      <p>
-      <img src="searchResult.png" alt="Search"/>
+      <img src="Prototypes/searchResult.png" alt="Search"/>
      </p>
 
-   * Mockup for the payment page:
+    * Mockup for the payment page:
      <p>
-      <img src="orderPage.png" alt="Order"/>
+      <img src="Prototypes/orderPage.png" alt="Order"/>
      </p>
 
-   * Mockup for the confirmed purchase page:
+    * Mockup for the confirmed purchase page:
      <p>
-      <img src="confirmedPage.png" alt="Confirmed"/>
+      <img src="Prototypes/confirmedPage.png" alt="Confirmed"/>
+     </p>
+
+    * Mockup for the Register page:
+     <p>
+      <img src="Prototypes/registerPage.png" alt="Register"/>
+     </p>
+
+    * Mockup for the User Account page:
+     <p>
+      <img src="Prototypes/UserAccount.png" alt="Account"/>
+     </p>
+
+    * Mockup for the User Management page:
+     <p>
+      <img src="Prototypes/userManagement.png" alt="Management"/>
+     </p>
+
+    * Mockup for the Storage page:
+     <p>
+      <img src="Prototypes/storagePage.png" alt="Storage"/>
      </p>
      
    * All data related to storage, products, and users will be saved on a server.
