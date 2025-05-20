@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import Welcome from './components/Welcome/Welcome';
-import Products from './components/Products/Products';
-import Footer from './components/Footer/Footer';
+import Header from './components/header.jsx';
+import Welcome from './components/welcome.jsx';
+import Products from './components/product.jsx';
+import Footer from './components/footer.jsx';
 
 function App() {
   return (
