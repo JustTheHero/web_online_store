@@ -131,12 +131,11 @@ const Confirmation = () => {
               </div>
             </div>
             
-
           </div>
         </div>
         
         <div className="confirmation_actions">
-          <button className="btn home_btn" onClick={handleGoToHome}>
+          <button className="home_btn" onClick={handleGoToHome}>
             Voltar para Home
           </button>
           <button className="btn account_btn" onClick={handleGoToAccount}>
