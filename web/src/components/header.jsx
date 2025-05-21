@@ -25,17 +25,17 @@ const Header = () => {
           </div>
           <div className="container_nav">
             <ul className="nav_itens">
-              <li><a href="#elojob">EloJob</a></li>
-              <li><a href="#acounts">Accounts</a></li>
-              <li><a href="#reviews">Reviews</a></li>
-              <li><a href="#coach">Coach</a></li>
+              <li><Link to="/">EloJob</Link></li>
+              <li><Link to="/loginSection">Accounts</Link></li>
+              <li><Link to="/reviews">Reviews</Link></li>
+              <li><Link to="/coach">Coach</Link></li>
             </ul>
           </div>
         </div>
         <div className="top_menu">
           <div className="icons_navigation">
             <Link to="/cart">Cart</Link>
-            <a href="#account">Account</a>
+            <Link to="/loginSection">Account</Link>
           </div>
           <div className="search_bar">
             <form onSubmit={handleSearchSubmit}>

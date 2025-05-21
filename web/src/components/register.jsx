@@ -4,7 +4,7 @@ import { User, UserCheck, AtSign, Lock, Eye, EyeOff, Phone } from 'lucide-react'
 import './register.css';
 
 const Register = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -116,7 +116,7 @@ const Register = () => {
           <div className="card-footer">
             <button 
               className="submit-button"
-              //onClick={() => navigate("/user-account")}
+              onClick={() => navigate("/userAccount")}
             >
               Create Account
             </button>

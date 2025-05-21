@@ -1,7 +1,6 @@
 /* Register.css */
 .register-container {
     min-height: 100vh;
-    background-color: #0A2342;
     padding: 3rem 1rem;
   }
   
@@ -11,7 +10,6 @@
   }
   
   .card {
-    background-color: #1F4068;
     border: none;
     border-radius: 0.5rem;
     color: white;
@@ -120,7 +118,7 @@
     color: #0A2342;
     border: none;
     border-radius: 0.375rem;
-    padding: 1.5rem 1rem;
+    padding: 1rem;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
