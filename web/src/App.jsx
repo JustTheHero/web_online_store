@@ -11,6 +11,8 @@ import Confirmation from './components/confirmation.jsx';
 import UserAccount from './components/userAccount.jsx';
 import LoginSection from './components/loginSection.jsx';
 import Register from './components/register.jsx';
+import UserManagement from './components/userManagement.jsx';
+import Storage from './components/storage.jsx';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="/userAccount" element={<UserAccount />} />
             <Route path="/loginSection" element={<LoginSection />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/userManagement" element={<UserManagement />} />
+            <Route path="/storage" element={<Storage />} />
           </Routes>
         </main>
         <Footer />
