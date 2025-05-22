@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Save, Users, Settings, ShieldCheck, Users2, User } from "lucide-react";
+import { Save, Users, Settings, ShieldCheck, Warehouse, Users2, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./UserAccount.css";
 
 const UserAccount = () => {
@@ -11,6 +12,8 @@ const UserAccount = () => {
     email: "john.doe@example.com",
     discordUsername: "johndoe#1234"
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -40,13 +43,13 @@ const UserAccount = () => {
                 
                 {isAdmin && (
                   <>
-                    <button className="ghost-button" onClick={() => window.location.href = "/user-management"}>
+                    <button className="ghost-button" onClick={() => navigate("/userManagement")}>
                       <Users className="icon" />
                       Manage Clients
                     </button>
                     
                     <button className="ghost-button" onClick={() => window.location.href = "/storage"}>
-                      <ShieldCheck className="icon" />
+                      <Warehouse className="icon" />
                       Storage
                     </button>
                   </>

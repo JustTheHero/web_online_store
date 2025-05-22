@@ -48,7 +48,7 @@ const Confirmation = () => {
   };
 
   const handleGoToAccount = () => {
-    navigate('/account');
+    navigate('/userAccount');
   };
 
   // Gera um número de pedido aleatório

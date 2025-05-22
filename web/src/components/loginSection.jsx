@@ -23,7 +23,7 @@ function LoginSection() {
             <button className="submit-button" type="submit">
               Login
             </button>
-            <p>Don't have an account? <a href="/register">Register</a></p>
+            <p className="register-line">Don't have an account? <a className='regbtn' href="/register">Register</a></p>
           </form>
         </div>
       </div>

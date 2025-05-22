@@ -10,7 +10,7 @@
 /* Main container */
 .user-account-container {
   min-height: 100vh;
-  background-color: #0d1117;
+  background-color: #0A2342;
   padding: 2rem 1rem;
 }
 
@@ -78,6 +78,8 @@
   font-size: 1rem;
   text-decoration: none;
   transition: background-color 0.3s;
+  min-width: fit-content;
+  white-space: default;
 }
 
 .primary-button {
