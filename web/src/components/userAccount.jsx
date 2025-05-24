@@ -95,7 +95,7 @@ const UserAccount = () => {
               </div>
               
               <button 
-                className="primary-button"
+                className="btn"
                 onClick={handleSave}
               >
                 Save Changes
@@ -144,7 +144,7 @@ const UserAccount = () => {
               <div className="security-section">
                 <h3 className="section-title">Password</h3>
                 <p className="section-description">Change your password to keep your account secure</p>
-                <button className="secondary-button">
+                <button className="btn">
                   <Lock className="button-icon" />
                   Change Password
                 </button>
@@ -153,7 +153,7 @@ const UserAccount = () => {
               <div className="security-section">
                 <h3 className="section-title">Two-Factor Authentication</h3>
                 <p className="section-description">Add an extra layer of security to your account</p>
-                <button className="secondary-button">
+                <button className="btn">
                   <Shield className="button-icon" />
                   Enable 2FA
                 </button>
@@ -162,7 +162,7 @@ const UserAccount = () => {
               <div className="security-section">
                 <h3 className="section-title">Login Activity</h3>
                 <p className="section-description">Review recent login attempts</p>
-                <button className="secondary-button">
+                <button className="btn">
                   <Eye className="button-icon" />
                   View Activity
                 </button>
@@ -179,7 +179,7 @@ const UserAccount = () => {
             </div>
             <div className="card-content">
               <p className="admin-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam neque qui error corrupti deleniti excepturi libero perspiciatis assumenda accusantium fugit. Eum quisquam animi asperiores perspiciatis pariatur saepe nostrum repellat est!</p>
-              <button className="primary-button" onClick={() => navigate('/userManagement')}>
+              <button className="btn" onClick={() => navigate('/userManagement')}>
                 <Users className="button-icon" />
                 View All Clients
               </button>
@@ -195,7 +195,7 @@ const UserAccount = () => {
             </div>
             <div className="card-content">
               <p className="admin-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam neque qui error corrupti deleniti excepturi libero perspiciatis assumenda accusantium fugit. Eum quisquam animi asperiores perspiciatis pariatur saepe nostrum repellat est!</p>
-              <button className="primary-button" onClick={() => navigate('/storage')}>
+              <button className="btn" onClick={() => navigate('/storage')}>
                 <Warehouse className="button-icon" />
                 Manage Storage
               </button>
