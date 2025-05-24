@@ -37,7 +37,7 @@ const ProductDescription = () => {
     return (
       <div className="container_product_description">
         <p>Produto não encontrado</p>
-        <button className="btn back_btn" onClick={handleGoBack}>Voltar</button>
+        <button className="btn" onClick={handleGoBack}>Voltar</button>
       </div>
     );
   }
@@ -45,7 +45,7 @@ const ProductDescription = () => {
   return (
     <section>
       <div className="container_product_description">
-        <button className="btn back_btn" onClick={handleGoBack}>← Voltar</button>
+        <button className="btn" onClick={handleGoBack}>Voltar</button>
         
         <div className="product_content">
           <div className="product_image">

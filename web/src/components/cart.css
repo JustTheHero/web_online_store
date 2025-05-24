@@ -10,6 +10,18 @@
     border: 2px solid #00BFFF;
 }
 
+.back_btn {
+    color: #00BFFF;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-align: center;
+}
 .cart_items {
     display: grid;  
     grid-template-columns: repeat(4, 1fr);

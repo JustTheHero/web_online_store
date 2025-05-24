@@ -197,7 +197,7 @@ const Payment = () => {
     <section>
       <div className="container_payment">
         <button className="back_btn" onClick={handleGoBack}>
-          {paymentStep === 'confirmation' ? '← Voltar aos Dados do Cartão' : '← Voltar ao Carrinho'}
+          {paymentStep === 'confirmation' ? 'Voltar aos Dados do Cartão' : 'Voltar ao Carrinho'}
         </button>
         
         <h1 className="payment_title">Finalizar Compra</h1>
