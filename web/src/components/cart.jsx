@@ -33,7 +33,7 @@ const Cart = () => {
             </div>
             <div className="cart_total">
               <h3>Total: ${totalPrice.toFixed(2)}</h3>
-              <button className="back_btn" onClick={() => navigate('/payment')}>Checkout</button>
+              <button className="btn" onClick={() => navigate('/payment')}>Checkout</button>
             </div>
           </>
         ) : (

@@ -196,7 +196,7 @@ const Payment = () => {
   return (
     <section>
       <div className="container_payment">
-        <button className="back_btn" onClick={handleGoBack}>
+        <button className="btn" onClick={handleGoBack}>
           {paymentStep === 'confirmation' ? 'Voltar aos Dados do Cartão' : 'Voltar ao Carrinho'}
         </button>
         
@@ -295,7 +295,7 @@ const Payment = () => {
                     </div>
                   </div>
                   
-                  <button type="submit" className="payment_btn">
+                  <button type="submit" className="btn">
                     Adicionar Cartão
                   </button>
                 </form>
@@ -352,7 +352,7 @@ const Payment = () => {
                     }
                   </div>
                   
-                  <button type="submit" className="complete_btn">
+                  <button type="submit" className="btn">
                     Finalizar Compra
                   </button>
                 </form>
