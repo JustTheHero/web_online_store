@@ -1,0 +1,158 @@
+{
+  "users": [
+    { "id": 1, "name": "John Smith", "email": "john.smith@example.com", "discord": "johnsmith#1234", "isAdmin": false },
+    { "id": 2, "name": "Maria Garcia", "email": "maria.garcia@example.com", "discord": "mariagarcia#5678", "isAdmin": false },
+    { "id": 3, "name": "Robert Johnson", "email": "robert.johnson@example.com", "discord": "robert.j#9012", "isAdmin": true },
+    { "id": 4, "name": "Emily Chen", "email": "emily.chen@example.com", "discord": "emilyc#3456", "isAdmin": false },
+    { "id": 5, "name": "Mohamed Ali", "email": "mohamed.ali@example.com", "discord": "mohamedali#7890", "isAdmin": false },
+    { "id": 6, "name": "Sarah Wilson", "email": "sarah.wilson@example.com", "discord": "sarahw#1234", "isAdmin": false }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Coach Lol",
+      "price": 9.99,
+      "image": "/api/placeholder/200/200",
+      "category": "coach",
+      "quantity": 1,
+      "description": "Coach Lol"
+    },
+    {
+      "id": 2,
+      "title": "Coach DOTA",
+      "price": 12.99,
+      "image": "/api/placeholder/200/200",
+      "category": "coach",
+      "quantity": 1,
+      "description": "Coach DOTA"
+    },
+    {
+      "id": 3,
+      "title": "Coach CS:GO",
+      "price": 14.99,
+      "image": "/api/placeholder/200/200",
+      "category": "coach",
+      "quantity": 1,
+      "description": "Coach CS:GO"
+    },
+    {
+      "id": 4,
+      "title": "EloBoost Bronze-Silver",
+      "price": 29.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Bronze-Silver"
+    },
+    {
+      "id": 5,
+      "title": "EloBoost Silver-Gold",
+      "price": 39.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Silver-Gold"
+    },
+    {
+      "id": 6,
+      "title": "EloBoost Gold-Platinum",
+      "price": 49.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Gold-Platinum"
+    },
+    {
+      "id": 7,
+      "title": "EloBoost Platinum-Diamond",
+      "price": 79.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Platinum-Diamond"
+    },
+    {
+      "id": 8,
+      "title": "EloBoost Diamond-Master",
+      "price": 129.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Diamond-Master"
+    }
+  ],
+  "cartProducts": [
+    {
+      "id": 1,
+      "title": "Coach Lol",
+      "price": 9.99,
+      "image": "/api/placeholder/200/200",
+      "category": "coach",
+      "quantity": 1,
+      "description": "Coach Lol"
+    },
+    {
+      "id": 2,
+      "title": "Coach DOTA",
+      "price": 12.99,
+      "image": "/api/placeholder/200/200",
+      "category": "coach",
+      "quantity": 1,
+      "description": "Coach DOTA"
+    },
+    {
+      "id": 3,
+      "title": "Coach CS:GO",
+      "price": 14.99,
+      "image": "/api/placeholder/200/200",
+      "category": "coach",
+      "quantity": 1,
+      "description": "Coach CS:GO"
+    },
+    {
+      "id": 4,
+      "title": "EloBoost Bronze-Silver",
+      "price": 29.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Bronze-Silver"
+    },
+    {
+      "id": 5,
+      "title": "EloBoost Silver-Gold",
+      "price": 39.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Silver-Gold"
+    },
+    {
+      "id": 6,
+      "title": "EloBoost Gold-Platinum",
+      "price": 49.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Gold-Platinum"
+    },
+    {
+      "id": 7,
+      "title": "EloBoost Platinum-Diamond",
+      "price": 79.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Platinum-Diamond"
+    },
+    {
+      "id": 8,
+      "title": "EloBoost Diamond-Master",
+      "price": 129.99,
+      "image": "/api/placeholder/200/200",
+      "category": "eloboost",
+      "quantity": 1,
+      "description": "EloBoost Diamond-Master"
+    }
+  ]
+}
