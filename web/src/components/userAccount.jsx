@@ -11,7 +11,7 @@ import {
   Eye,
   Lock
 } from "lucide-react";
-import "./userAccount.css";
+import "./UserAccount.css";
 import { useNavigate } from "react-router-dom";
 
 const UserAccount = () => {
@@ -42,7 +42,6 @@ const UserAccount = () => {
   const menuItems = [
     { id: 'profile', label: 'Account Settings', icon: Settings, adminOnly: false },
     { id: 'orders', label: 'My Orders', icon: Package, adminOnly: false },
-    { id: 'security', label: 'Access & Security', icon: Shield, adminOnly: false },
     { id: 'clients', label: 'Manage Clients', icon: Users, adminOnly: true },
     { id: 'storage', label: 'Storage', icon: Warehouse, adminOnly: true },
   ];
@@ -134,43 +133,6 @@ const UserAccount = () => {
           </div>
         );
 
-      case 'security':
-        return (
-          <div className="card">
-            <div className="card-header">
-              <h2 className="card-title">Access & Security</h2>
-            </div>
-            <div className="card-content">
-              <div className="security-section">
-                <h3 className="section-title">Password</h3>
-                <p className="section-description">Change your password to keep your account secure</p>
-                <button className="btn">
-                  <Lock className="button-icon" />
-                  Change Password
-                </button>
-              </div>
-              
-              <div className="security-section">
-                <h3 className="section-title">Two-Factor Authentication</h3>
-                <p className="section-description">Add an extra layer of security to your account</p>
-                <button className="btn">
-                  <Shield className="button-icon" />
-                  Enable 2FA
-                </button>
-              </div>
-              
-              <div className="security-section">
-                <h3 className="section-title">Login Activity</h3>
-                <p className="section-description">Review recent login attempts</p>
-                <button className="btn">
-                  <Eye className="button-icon" />
-                  View Activity
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-
       case 'clients':
         return (
           <div className="card">
@@ -178,7 +140,7 @@ const UserAccount = () => {
               <h2 className="card-title">Manage Clients</h2>
             </div>
             <div className="card-content">
-              <p className="admin-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam neque qui error corrupti deleniti excepturi libero perspiciatis assumenda accusantium fugit. Eum quisquam animi asperiores perspiciatis pariatur saepe nostrum repellat est!</p>
+              <p className="admin-content">View all users' contact information and choose to grant or revoke admin permissions for a user.</p>
               <button className="btn" onClick={() => navigate('/userManagement')}>
                 <Users className="button-icon" />
                 View All Clients
@@ -194,7 +156,7 @@ const UserAccount = () => {
               <h2 className="card-title">Storage Control</h2>
             </div>
             <div className="card-content">
-              <p className="admin-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam neque qui error corrupti deleniti excepturi libero perspiciatis assumenda accusantium fugit. Eum quisquam animi asperiores perspiciatis pariatur saepe nostrum repellat est!</p>
+              <p className="admin-content">View all product information, with the option to edit, remove, or add new products to the shop.</p>
               <button className="btn" onClick={() => navigate('/storage')}>
                 <Warehouse className="button-icon" />
                 Manage Storage
