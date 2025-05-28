@@ -9,23 +9,6 @@
     border: 2px solid #00BFFF;
 }
 
-.back_btn {
-    background-color: #00BFFF;
-    color: #161b22;
-    border: none;
-    padding: 1rem;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-    text-align: center;
-}
-.back_btn:hover {
-    background-color: rgba(0, 191, 255, 0.1);
-}
-
 .product_content {
     display: grid;
     grid-template-columns: 1fr 1fr;

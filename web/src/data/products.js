@@ -3,7 +3,7 @@ const products = [
       id: 1,
       title: "Coach Lol",
       price: 9.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/lol.jpg",
       category: "coach",
       quantity: 1,
       description: "Coach Lol"
@@ -12,7 +12,7 @@ const products = [
       id: 2,
       title: "Coach DOTA",
       price: 12.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/dota.png",
       category: "coach",
       quantity: 1,
       description: "Coach DOTA"
@@ -21,7 +21,7 @@ const products = [
       id: 3,
       title: "Coach CS:GO",
       price: 14.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/cs.png",
       category: "coach", 
       quantity: 1,
       description: "Coach CS:GO"
@@ -30,7 +30,7 @@ const products = [
       id: 4,
       title: "EloBoost Bronze-Silver",
       price: 29.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
       description: "EloBoost Bronze-Silver"
@@ -39,7 +39,7 @@ const products = [
       id: 5,
       title: "EloBoost Silver-Gold",
       price: 39.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
       description: "EloBoost Silver-Gold"
@@ -48,7 +48,7 @@ const products = [
       id: 6,
       title: "EloBoost Gold-Platinum",
       price: 49.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
       description: "EloBoost Gold-Platinum"
@@ -57,7 +57,7 @@ const products = [
       id: 7,
       title: "EloBoost Platinum-Diamond",
       price: 79.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
       description: "EloBoost Platinum-Diamond"
@@ -66,7 +66,7 @@ const products = [
       id: 8,
       title: "EloBoost Diamond-Master",
       price: 129.99,
-      image: "/api/placeholder/200/200",
+      image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
       description: "EloBoost Diamond-Master"
