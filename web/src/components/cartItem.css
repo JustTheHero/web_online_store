@@ -1,0 +1,36 @@
+.cart_item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+.cart_item img {
+    width: 80px;          /* Fixed width */
+    height: 80px;         /* Fixed height */
+    max-width: 80px;      /* Ensure it doesn't exceed this */
+    max-height: 80px;     /* Ensure it doesn't exceed this */
+    object-fit: cover;    /* This will crop the image to fit nicely */
+    border-radius: 8px;   /* Optional: adds rounded corners */
+    flex-shrink: 0;       /* Prevents the image from shrinking */
+}
+
+.cart_item_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
+    flex: 1;              /* Takes up remaining space */
+}
+
+.cart_item img.responsive {
+    width: 25%;
+    height: auto;
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+}

@@ -23,6 +23,8 @@ body {
   letter-spacing: 1px;
   font-size: 0.9rem;
   cursor: pointer;
+  width: fit-content;
+  margin-bottom: 20px;
 }
 .btn:hover {
   background-color: transparent;

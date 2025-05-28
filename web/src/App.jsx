@@ -13,6 +13,7 @@ import LoginSection from './components/loginSection.jsx';
 import Register from './components/register.jsx';
 import UserManagement from './components/userManagement.jsx';
 import Storage from './components/storage.jsx';
+import SearchResults from './components/SearchResults.jsx';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/userManagement" element={<UserManagement />} />
             <Route path="/storage" element={<Storage />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </main>
         <Footer />

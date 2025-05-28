@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import productsData from '../data/products.js';
 import './header.css';
 
 const Header = () => {
@@ -12,8 +13,19 @@ const Header = () => {
   
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log('Search query:', searchQuery);
-    //FAZER LOGICA DE BUSCA
+    console.log(searchQuery);
+    if(searchQuery === ''){
+      navigate('/');
+      return;
+    }
+    const filteredProducts = productsData.filter(product =>
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    console.log(filteredProducts);
+
+    navigate('/search', { state: { products: filteredProducts, query: searchQuery } });
   };
   
   return (
@@ -40,8 +52,8 @@ const Header = () => {
           <div className="search_bar">
             <form onSubmit={handleSearchSubmit}>
               <input 
-                type="text" 
-                placeholder="Search Products and services" 
+                type="text"
+                placeholder="Search Products and services"
                 value={searchQuery}
                 onChange={handleSearchChange}
               />

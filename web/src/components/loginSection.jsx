@@ -20,7 +20,7 @@ function LoginSection() {
             <div className='input_group'>
               <input type="password" placeholder='Password' />
             </div>
-            <button className="submit-button" type="submit">
+            <button className="btn" type="submit">
               Login
             </button>
             <p className="register-line">Don't have an account? <a className='regbtn' href="/register">Register</a></p>
