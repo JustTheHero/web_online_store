@@ -92,7 +92,54 @@
 * CRUD operations on the storage are also saved locally.
 
 ## 6. Build Procedures:
+Prerequisites
 
+Node.js (version 18 or higher recommended)
+npm or yarn package manager
+Git (for version control)
+
+# Initial Setup
+Install Dependencies
+```
+#Install all project dependencies
+npm install
+```
+Or if using yarn
+```
+yarn install
+```
+
+Development Build ProcessStart Development Server
+```
+#Start the development server with hot reloading
+npm run dev
+```
+# The application will be available at http://localhost:5173
+Code Quality Checks
+  ``` 
+#Run ESLint to check for code quality issues
+npm run lint
+```
+
+Production Build Process
+Pre-build Validation
+Before building for production, ensure code quality by:
+```
+#Run linting checks
+npm run lint
+```
+Production Build
+```
+#Create optimized production build
+npm run build
+```
+
+Build verification
+```
+#Preview the production build locally
+npm run preview
+```
+# The built application will be served at http://localhost:4173
 ## 7. Problems:
 
 ## 8. Comments:
