@@ -28,9 +28,9 @@ const UserAccount = () => {
   });
 
   const [userData, setUserData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    discordUsername: "johndoe#1234"
+    name: "admin",
+    email: "admin@example.com",
+    discordUsername: "admin#0000"
   });
 
   const [userOrders] = useState([
