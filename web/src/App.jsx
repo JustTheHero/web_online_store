@@ -13,10 +13,16 @@ import LoginSection from './components/loginSection.jsx';
 import Register from './components/register.jsx';
 import UserManagement from './components/userManagement.jsx';
 import Storage from './components/storage.jsx';
+import Coach from './components/coachs.jsx';
+import EloBoost from './components/eloboost.jsx';
+import Accounts from './components/accounts.jsx';
+import Reviews from './components/reviews.jsx';
 import SearchResults from './components/SearchResults.jsx';
+import { CartProvider } from './contexts/CartContext.jsx';
 
 function App() {
   return (
+    <CartProvider>
     <Router>
       <div className="App">
         <Header />
@@ -30,6 +36,10 @@ function App() {
             } />
             <Route path="/cart" element={<Cart />} />
             <Route path="/product/:id" element={<ProductDescription />} />
+            <Route path="/coach" element={<Coach />} />
+            <Route path="/eloboost" element={<EloBoost />} />
+            <Route path="/Accounts" element={<Accounts />} />
+            <Route path="/reviews" element={<Reviews />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/userAccount" element={<UserAccount />} />
@@ -43,6 +53,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </CartProvider>
   );
 }
 
