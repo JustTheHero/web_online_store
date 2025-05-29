@@ -3,9 +3,10 @@ const products = [
       id: 1,
       title: "Coach Lol",
       price: 9.99,
-      image: "../src/assets/lol.jpg",
+      image: "../src/assets/logo_lol.png",
       category: "coach",
       quantity: 1,
+      stock: 20, 
       description: "Coach Lol"
     },
     {
@@ -15,6 +16,7 @@ const products = [
       image: "../src/assets/dota.png",
       category: "coach",
       quantity: 1,
+      stock: 10,
       description: "Coach DOTA"
     },
     {
@@ -24,6 +26,7 @@ const products = [
       image: "../src/assets/cs.png",
       category: "coach", 
       quantity: 1,
+      stock: 15,
       description: "Coach CS:GO"
     },
     {
@@ -33,6 +36,7 @@ const products = [
       image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
+      stock: 25,
       description: "EloBoost Bronze-Silver"
     },
     {
@@ -42,6 +46,7 @@ const products = [
       image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
+      stock: 30,
       description: "EloBoost Silver-Gold"
     },
     {
@@ -51,6 +56,7 @@ const products = [
       image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
+      stock: 20,
       description: "EloBoost Gold-Platinum"
     },
     {
@@ -60,6 +66,7 @@ const products = [
       image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
+      stock: 15,
       description: "EloBoost Platinum-Diamond"
     },
     {
@@ -69,7 +76,48 @@ const products = [
       image: "../src/assets/elo.jpeg",
       category: "eloboost",
       quantity: 1,
+      stock: 40,
       description: "EloBoost Diamond-Master"
+    },
+    {
+      id: 9,
+      title: "Smurf Account all Champions",
+      price: 19.99,
+      image: "../src/assets/lol.jpg",
+      category: "account",
+      quantity: 1,
+      stock: 25,
+      description: "Smurf Account with all Champions"
+    },
+    {
+      id: 10,
+      title: "Smurf Account Handleveled",
+      price: 59.99,
+      image: "../src/assets/lol.jpg",
+      category: "account",
+      quantity: 1,
+      stock: 30,
+      description: "Smurf Account handleveled to level 30"
+    },
+    {
+      id: 11,
+      title: "Smurf Account Bot Leveled",
+      price: 9.99,
+      image: "../src/assets/lol.jpg",
+      category: "account",
+      quantity: 1,
+      stock: 20,
+      description: "Smurf Account leveled by bot to level 30"
+    },
+    {
+      id: 12,
+      title: "Smurf Account Iron IV 0 LP",
+      price: 49.99,
+      image: "../src/assets/lol.jpg",
+      category: "account",
+      quantity: 1,
+      stock: 15,
+      description: "Smurf Account Iron IV 0 LP ranking"
     }
   ];
 
