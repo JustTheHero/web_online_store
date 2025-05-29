@@ -5,4 +5,5 @@ export const initialUsers = [
   { id: 4, name: "Emily Chen", email: "emily.chen@example.com", discord: "emilyc#3456", isAdmin: false },
   { id: 5, name: "Mohamed Ali", email: "mohamed.ali@example.com", discord: "mohamedali#7890", isAdmin: false },
   { id: 6, name: "Sarah Wilson", email: "sarah.wilson@example.com", discord: "sarahw#1234", isAdmin: false },
+  { id: 7, name: "admin", email: "admin@example.com", discord: "admin#0000", isAdmin: true },
 ];
