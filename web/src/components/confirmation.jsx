@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { cartProducts } from '../data/products';
 import './confirmation.css';
 
 const Confirmation = () => {
@@ -10,38 +9,33 @@ const Confirmation = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [paymentInfo, setPaymentInfo] = useState({
     cardLastFour: '1234',
-    cardName: 'Nome do Titular',
+    cardName: 'Card Holder',
     cardExpiry: '12/25'
   });
   
-  // Dados de exemplo para o usuário - em um cenário real, viriam do contexto
   const [user, setUser] = useState({
-    username: 'usuarioComprador',
+    username: 'customer',
   });
 
   useEffect(() => {
-    // Em um cenário real, você obteria esses dados do estado global ou do contexto
-    // Por enquanto, vamos simular que recebemos os dados da página de pagamento
-    const purchasedProducts = cartProducts.filter(product => product.quantity > 0);
-    setProducts(purchasedProducts);
-    
-    // Recuperar dados de pagamento (simulado)
-    if (location.state && location.state.paymentInfo) {
-      setPaymentInfo(location.state.paymentInfo);
-    }
-    
-    if (location.state && location.state.userData) {
-      setUser({
-        username: location.state.userData.fullName
-      });
+    // Get the products and other data from location.state
+    if (location.state) {
+      if (location.state.products) {
+        setProducts(location.state.products);
+      }
+      if (location.state.paymentInfo) {
+        setPaymentInfo(location.state.paymentInfo);
+      }
+      if (location.state.userData) {
+        setUser({
+          username: location.state.userData.fullName
+        });
+      }
+      if (location.state.totalPrice) {
+        setTotalPrice(location.state.totalPrice);
+      }
     }
   }, [location]);
-
-  useEffect(() => {
-    // Calcular o preço total
-    const total = products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-    setTotalPrice(total);
-  }, [products]);
 
   const handleGoToHome = () => {
     navigate('/');
@@ -51,16 +45,16 @@ const Confirmation = () => {
     navigate('/userAccount');
   };
 
-  // Gera um número de pedido aleatório
+  // Generate random order number
   const orderNumber = `#${Math.floor(100000 + Math.random() * 900000)}`;
   
-  // Data de entrega estimada (7 dias após a compra)
+  // Estimated delivery date (7 days from now)
   const today = new Date();
   const deliveryDate = new Date(today);
   deliveryDate.setDate(today.getDate() + 7);
   
   const formatDate = (date) => {
-    return date.toLocaleDateString('pt-BR', {
+    return date.toLocaleDateString('en-US', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
@@ -77,18 +71,18 @@ const Confirmation = () => {
               <path d="M8 12L11 15L16 9" stroke="#00BFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <h1 className="confirmation_title">Compra Realizada com Sucesso!</h1>
+          <h1 className="confirmation_title">Successful Purchase!</h1>
           <p className="confirmation_message">
-            Obrigado pela sua compra, <span className="highlight">{user.username}</span>! Seu pedido {orderNumber} foi confirmado.
+            Thanks for your purchase, <span className="highlight">{user.username}</span>! Your order {orderNumber} was confirmed.
           </p>
           <p className="delivery_info">
-            Previsão de entrega: <span className="highlight">{formatDate(deliveryDate)}</span>
+            Expected delivery date: <span className="highlight">{formatDate(deliveryDate)}</span>
           </p>
         </div>
         
         <div className="confirmation_content">
           <div className="order_details">
-            <h2>Detalhes do Pedido</h2>
+            <h2>Order Details</h2>
             
             <div className="purchased_items">
               {products.map(product => (
@@ -96,12 +90,12 @@ const Confirmation = () => {
                   <div className="item_info">
                     <img 
                       src={product.image} 
-                      alt={product.name || product.title} 
+                      alt={product.title} 
                       className="item_image"
                     />
                     <div>
-                      <p className="item_name">{product.name || product.title}</p>
-                      <p className="item_quantity">Qtd: {product.quantity}</p>
+                      <p className="item_name">{product.title}</p>
+                      <p className="item_quantity">Qty: {product.quantity}</p>
                     </div>
                   </div>
                   <p className="item_price">${(product.price * product.quantity).toFixed(2)}</p>
@@ -116,7 +110,7 @@ const Confirmation = () => {
           </div>
           
           <div className="payment_details">
-            <h2>Método de Pagamento</h2>
+            <h2>Payment Method</h2>
             
             <div className="card_details">
               <div className="card_icon_container">
@@ -130,16 +124,15 @@ const Confirmation = () => {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
         
         <div className="confirmation_actions">
           <button className="home_btn" onClick={handleGoToHome}>
-            Voltar para Home
+            Home page
           </button>
           <button className="btn account_btn" onClick={handleGoToAccount}>
-            Minha Conta
+            My Account
           </button>
         </div>
       </div>

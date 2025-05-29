@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { cartProducts } from '../data/products';
+import { useCart } from '../contexts/CartContext';
 import './payment.css';
 
 const Payment = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const { cartItems, totalPrice, clearCart } = useCart();
   
   // Estado para os dados do cartão
   const [cardData, setCardData] = useState({
@@ -33,18 +32,6 @@ const Payment = () => {
   // Estado para controlar a etapa do pagamento
   const [paymentStep, setPaymentStep] = useState('card-details');
 
-  useEffect(() => {
-    // Em um caso real, você buscaria os itens do carrinho de um estado global
-    // Por enquanto, vamos usar os mesmos dados mockados
-    setProducts(cartProducts.filter(product => product.quantity > 0));
-  }, []);
-
-  useEffect(() => {
-    // Calcular o preço total
-    const total = products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-    setTotalPrice(total);
-  }, [products]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     
@@ -52,19 +39,14 @@ const Payment = () => {
     let formattedValue = value;
     
     if (name === 'number') {
-      // Remover qualquer caractere que não seja número
-      formattedValue = value.replace(/\D/g, '');
-      // Limitar a 16 dígitos
-      formattedValue = formattedValue.slice(0, 16);
+      formattedValue = value.replace(/\D/g, '').slice(0, 16);
     } else if (name === 'expiry') {
-      // Formatar MM/AA
       formattedValue = value.replace(/\D/g, '');
       if (formattedValue.length > 2) {
         formattedValue = formattedValue.slice(0, 2) + '/' + formattedValue.slice(2, 4);
       }
       formattedValue = formattedValue.slice(0, 5);
     } else if (name === 'cvv') {
-      // Limitar a 3-4 dígitos numéricos
       formattedValue = value.replace(/\D/g, '').slice(0, 4);
     }
     
@@ -73,7 +55,6 @@ const Payment = () => {
       [name]: formattedValue
     });
     
-    // Limpar erro do campo atual ao digitar
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -90,7 +71,6 @@ const Payment = () => {
       [name]: value
     });
     
-    // Limpar erro do campo atual ao digitar
     if (userErrors[name]) {
       setUserErrors({
         ...userErrors,
@@ -102,24 +82,20 @@ const Payment = () => {
   const validateForm = () => {
     const newErrors = {};
     
-    // Validar número do cartão (16 dígitos)
     if (cardData.number.length !== 16) {
-      newErrors.number = 'O número do cartão deve ter 16 dígitos';
+      newErrors.number = 'Card number must be 16 digits';
     }
     
-    // Validar nome
     if (!cardData.name.trim()) {
-      newErrors.name = 'Nome do titular é obrigatório';
+      newErrors.name = 'Name on card is required';
     }
     
-    // Validar data de expiração
     if (!cardData.expiry || cardData.expiry.length !== 5) {
-      newErrors.expiry = 'Data de validade inválida';
+      newErrors.expiry = 'Invalid expiry date (MM/YY)';
     }
     
-    // Validar CVV
     if (!cardData.cvv || cardData.cvv.length < 3) {
-      newErrors.cvv = 'CVV inválido';
+      newErrors.cvv = 'Invalid CVV';
     }
     
     setErrors(newErrors);
@@ -129,14 +105,12 @@ const Payment = () => {
   const validateUserForm = () => {
     const newErrors = {};
     
-    // Validar nome completo
     if (!userData.fullName.trim()) {
-      newErrors.fullName = 'Nome completo é obrigatório';
+      newErrors.fullName = 'Complete name is required';
     }
     
-    // Validar senha
     if (!userData.password || userData.password.length < 6) {
-      newErrors.password = 'A senha deve ter pelo menos 6 caracteres';
+      newErrors.password = 'Password should be at least 6 characters long';
     }
     
     setUserErrors(newErrors);
@@ -148,7 +122,6 @@ const Payment = () => {
     setSubmitted(true);
     
     if (validateForm()) {
-      // Mudar para a próxima etapa
       setPaymentStep('confirmation');
     }
   };
@@ -158,9 +131,7 @@ const Payment = () => {
     setUserSubmitted(true);
     
     if (validateUserForm()) {
-      // Em um cenário real, você enviaria os dados para processamento
-      // Após processamento bem-sucedido, navegue para a página de confirmação
-      // com os dados da compra
+      clearCart();
       navigate('/confirmation', {
         state: {
           paymentInfo: {
@@ -169,7 +140,7 @@ const Payment = () => {
             cardExpiry: cardData.expiry
           },
           userData: userData,
-          products: products,
+          products: cartItems,
           totalPrice: totalPrice
         }
       });
@@ -197,26 +168,26 @@ const Payment = () => {
     <section>
       <div className="container_payment">
         <button className="btn" onClick={handleGoBack}>
-          {paymentStep === 'confirmation' ? 'Voltar aos Dados do Cartão' : 'Voltar ao Carrinho'}
+          {paymentStep === 'confirmation' ? 'Back to card details' : 'Back to Cart'}
         </button>
         
-        <h1 className="payment_title">Finalizar Compra</h1>
+        <h1 className="payment_title">Finish Order</h1>
         
         <div className="payment_content">
           <div className="payment_summary">
-            <h2>Resumo do Pedido</h2>
+            <h2>Order Summary</h2>
             
             <div className="order_items">
-              {products.map(product => (
+              {cartItems.map(product => (
                 <div key={product.id} className="order_item">
                   <div className="item_info">
                     <img 
                       src={product.image} 
-                      alt={product.name || product.title} 
+                      alt={product.title} 
                       className="item_image"
                     />
                     <div>
-                      <p className="item_name">{product.name || product.title}</p>
+                      <p className="item_name">{product.title}</p>
                       <p className="item_quantity">Qtd: {product.quantity}</p>
                     </div>
                   </div>
@@ -234,11 +205,11 @@ const Payment = () => {
           <div className="payment_form_container">
             {paymentStep === 'card-details' ? (
               <>
-                <h2>Dados de Pagamento</h2>
+                <h2>Payment Details</h2>
                 
                 <form className="payment_form" onSubmit={handleSubmit}>
                   <div className="form_group">
-                    <label htmlFor="cardNumber">Número do Cartão</label>
+                    <label htmlFor="cardNumber">Card Number</label>
                     <input
                       type="text"
                       id="cardNumber"
@@ -252,12 +223,12 @@ const Payment = () => {
                   </div>
                   
                   <div className="form_group">
-                    <label htmlFor="cardName">Nome do Titular</label>
+                    <label htmlFor="cardName">Name on Card</label>
                     <input
                       type="text"
                       id="cardName"
                       name="name"
-                      placeholder="Nome como está no cartão"
+                      placeholder="Name as shown on card"
                       value={cardData.name}
                       onChange={handleInputChange}
                       className={errors.name && submitted ? 'error' : ''}
@@ -267,12 +238,12 @@ const Payment = () => {
                   
                   <div className="form_row">
                     <div className="form_group">
-                      <label htmlFor="cardExpiry">Validade</label>
+                      <label htmlFor="cardExpiry">Expire Date</label>
                       <input
                         type="text"
                         id="cardExpiry"
                         name="expiry"
-                        placeholder="MM/AA"
+                        placeholder="MM/YY"
                         value={cardData.expiry}
                         onChange={handleInputChange}
                         className={errors.expiry && submitted ? 'error' : ''}
@@ -296,13 +267,13 @@ const Payment = () => {
                   </div>
                   
                   <button type="submit" className="btn">
-                    Adicionar Cartão
+                    Add Credit Card
                   </button>
                 </form>
               </>
             ) : (
               <>
-                <h2>Confirmação de Pagamento</h2>
+                <h2>Payment Confirmation</h2>
                 
                 <div className="card_summary">
                   <div className="card_summary_icon">
@@ -318,15 +289,15 @@ const Payment = () => {
                 </div>
                 
                 <form className="confirmation_form" onSubmit={handleFinalSubmit}>
-                  <h3>Dados da conta</h3>
+                  <h3>Account Details</h3>
                   
                   <div className="form_group">
-                    <label htmlFor="fullName">Nome de usuario</label>
+                    <label htmlFor="fullName">Username</label>
                     <input
                       type="text"
                       id="fullName"
                       name="fullName"
-                      placeholder="Nome do usuario"
+                      placeholder="Full Name"
                       value={userData.fullName}
                       onChange={handleUserInputChange}
                       className={userErrors.fullName && userSubmitted ? 'error' : ''}
@@ -337,12 +308,12 @@ const Payment = () => {
                   </div>
                   
                   <div className="form_group">
-                    <label htmlFor="password">Senha</label>
+                    <label htmlFor="password">Password</label>
                     <input
                       type="password"
                       id="password"
                       name="password"
-                      placeholder="Senha"
+                      placeholder="Password"
                       value={userData.password}
                       onChange={handleUserInputChange}
                       className={userErrors.password && userSubmitted ? 'error' : ''}
@@ -353,7 +324,7 @@ const Payment = () => {
                   </div>
                   
                   <button type="submit" className="btn">
-                    Finalizar Compra
+                    Finish Order
                   </button>
                 </form>
               </>

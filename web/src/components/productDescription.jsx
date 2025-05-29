@@ -1,32 +1,35 @@
+// src/pages/ProductDescription.js
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { cartProducts } from '../data/products';
+import { useCart } from '../contexts/CartContext';
 import './productDescription.css';
 
 const ProductDescription = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const { products, addToCart } = useCart();
   const [product, setProduct] = useState(null);
   
   useEffect(() => {
-    // Em um cenário real, você buscaria os dados da API
-    // Esta implementação usa os dados mockados do carrinho
-    const foundProduct = cartProducts.find(product => product.id === parseInt(id));
-    if (foundProduct) {
-      setProduct(foundProduct);
-    }
-  }, [id]);
+    const foundProduct = products.find(p => p.id === parseInt(id));
+    setProduct(foundProduct);
+  }, [id, products]);
 
   const handleIncreaseQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
+    if (product && quantity < product.stock) {
+      setQuantity(prev => prev + 1);
+    }
   };
 
   const handleDecreaseQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity > 1 ? prevQuantity - 1 : 1);
+    setQuantity(prev => (prev > 1 ? prev - 1 : 1));
   };
 
   const handleAddToCart = () => {
+    if (product) {
+      addToCart(product.id, quantity);
+    }
   };
 
   const handleGoBack = () => {
@@ -36,8 +39,8 @@ const ProductDescription = () => {
   if (!product) {
     return (
       <div className="container_product_description">
-        <p>Produto não encontrado</p>
-        <button className="btn" onClick={handleGoBack}>Voltar</button>
+        <p>Product not found</p>
+        <button className="btn" onClick={handleGoBack}>Go back</button>
       </div>
     );
   }
@@ -45,28 +48,45 @@ const ProductDescription = () => {
   return (
     <section>
       <div className="container_product_description">
-        <button className="btn" onClick={handleGoBack}>Voltar</button>
+        <button className="btn" onClick={handleGoBack}>Go back</button>
         
         <div className="product_content">
           <div className="product_image">
-            <img src={product.image} alt={product.name} />
+            <img src={product.image} alt={product.title} />
           </div>
           
           <div className="product_details">
-            <h1 className="product_name">{product.name}</h1>
+            <h1 className="product_name">{product.title}</h1>
             <p className="product_price">${product.price.toFixed(2)}</p>
             
             <div className="product_description">
-              <h3>Descrição</h3>
-              <p>{product.description || 'Sem descrição disponível para este produto.'}</p>
+              <h3>Description</h3>
+              <p>{product.description || 'No description available for this product.'}</p>
+            </div>
+
+            <div className="product_stock">
+              <h3>Stock</h3>
+              <p>{product.stock > 0 ? `${product.stock} available` : 'Out of stock'}</p>
             </div>
             
             <div className="quantity_control">
-              <h3>Quantidade</h3>
+              <h3>Quantity</h3>
               <div className="quantity_buttons">
-                <button className="quantity_btn" onClick={handleDecreaseQuantity}>-</button>
+                <button 
+                  className="quantity_btn" 
+                  onClick={handleDecreaseQuantity}
+                  disabled={quantity <= 1}
+                >
+                  -
+                </button>
                 <span className="quantity_value">{quantity}</span>
-                <button className="quantity_btn" onClick={handleIncreaseQuantity}>+</button>
+                <button 
+                  className="quantity_btn" 
+                  onClick={handleIncreaseQuantity}
+                  disabled={quantity >= product.stock}
+                >
+                  +
+                </button>
               </div>
             </div>
             
@@ -74,8 +94,12 @@ const ProductDescription = () => {
               <p>Total: ${(product.price * quantity).toFixed(2)}</p>
             </div>
             
-            <button className="btn add_to_cart" onClick={handleAddToCart}>
-              Adicionar ao Carrinho
+            <button 
+              className="btn add_to_cart" 
+              onClick={handleAddToCart}
+              disabled={product.stock <= 0}
+            >
+              {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
             </button>
           </div>
         </div>

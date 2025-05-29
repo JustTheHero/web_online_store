@@ -248,6 +248,9 @@
 }
 
 .home_btn {
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    min-width: fit-content;
     background-color: transparent;
     border: 2px solid #00BFFF;
     color: #00BFFF;

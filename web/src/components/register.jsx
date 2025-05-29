@@ -16,28 +16,14 @@ const Register = () => {
           </div>
           <div className="card-content">
             <div className="input-group">
-              <label htmlFor="firstName" className="input-label">First Name</label>
+              <label htmlFor="firstName" className="input-label">Username</label>
               <div className="input-container">
                 <div className="input-icon-wrapper">
                   <User className="input-icon" />
                 </div>
                 <input 
                   id="firstName"
-                  placeholder="Enter your first name"
-                  className="input-field" 
-                />
-              </div>
-            </div>
-            
-            <div className="input-group">
-              <label htmlFor="lastName" className="input-label">Last Name</label>
-              <div className="input-container">
-                <div className="input-icon-wrapper">
-                  <UserCheck className="input-icon" />
-                </div>
-                <input 
-                  id="lastName"
-                  placeholder="Enter your last name"
+                  placeholder="Enter your username"
                   className="input-field" 
                 />
               </div>

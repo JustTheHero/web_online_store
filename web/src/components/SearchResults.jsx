@@ -11,7 +11,7 @@ const SearchResults = () => {
     <section className="products">
       <div className="container_products">
         <h2>
-          {query ? `Resultados para "${query}"` : 'Resultados da Busca'}
+          {query ? `Results for "${query}"` : 'Search Results'}
         </h2>
         
         {products.length > 0 ? (
@@ -22,7 +22,7 @@ const SearchResults = () => {
           </div>
         ) : (
           <div className="no-results">
-            <h3>Nenhum produto encontrado para "{query}"</h3>
+            <h3>No matches found for "{query}"</h3>
           </div>
         )}
       </div>

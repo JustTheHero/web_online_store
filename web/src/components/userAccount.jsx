@@ -9,7 +9,9 @@ import {
   Package,
   Shield,
   Eye,
-  Lock
+  Lock,
+  Star,
+  X
 } from "lucide-react";
 import "./UserAccount.css";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +20,13 @@ const UserAccount = () => {
   const navigate = useNavigate();
   const [isAdmin] = useState(true); 
   const [activeSection, setActiveSection] = useState('profile');
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [reviewData, setReviewData] = useState({
+    rating: 0,
+    comment: ''
+  });
+
   const [userData, setUserData] = useState({
     name: "John Doe",
     email: "john.doe@example.com",
@@ -27,7 +36,7 @@ const UserAccount = () => {
   const [userOrders] = useState([
     { id: 1, date: "2025-05-20", status: "Delivered", total: "$45.99", product: "Coach Lol" },
     { id: 2, date: "2025-05-15", status: "Processing", total: "$129.99", product: "Duo Boost" },
-    { id: 3, date: "2025-05-10", status: "Shipped", total: "$89.99", product: "League Account" },
+    { id: 3, date: "2025-05-10", status: "Delivered", total: "$89.99", product: "League Account" },
   ]);
 
   const handleChange = (e) => {
@@ -37,6 +46,37 @@ const UserAccount = () => {
 
   const handleSave = () => {
     alert("Profile updated successfully!");
+  };
+
+  const handleWriteReview = (order) => {
+    setSelectedOrder(order);
+    setReviewData({ rating: 0, comment: '' });
+    setShowReviewModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowReviewModal(false);
+    setSelectedOrder(null);
+    setReviewData({ rating: 0, comment: '' });
+  };
+
+  const handleStarClick = (rating) => {
+    setReviewData(prev => ({ ...prev, rating }));
+  };
+
+  const handleCommentChange = (e) => {
+    setReviewData(prev => ({ ...prev, comment: e.target.value }));
+  };
+
+  const handleSubmitReview = () => {
+    if (reviewData.rating === 0) {
+      alert("Please select a rating!");
+      return;
+    }
+    
+    // Simulate review submission
+    alert(`Review submitted successfully! Rating: ${reviewData.rating} stars`);
+    handleCloseModal();
   };
 
   const menuItems = [
@@ -105,32 +145,99 @@ const UserAccount = () => {
 
       case 'orders':
         return (
-          <div className="card">
-            <div className="card-header">
-              <h2 className="card-title">My Orders</h2>
-            </div>
-            <div className="card-content">
-              <div className="orders-list">
-                {userOrders.map(order => (
-                  <div key={order.id} className="order-item">
-                    <div className="order-header">
-                      <span className="order-id">Order #{order.id}</span>
-                      <span className={`order-status status-${order.status.toLowerCase()}`}>
-                        {order.status}
-                      </span>
-                    </div>
-                    <div className="order-details">
-                      <p className="order-product">{order.product}</p>
-                      <div className="order-meta">
-                        <span className="order-date">{order.date}</span>
-                        <span className="order-total">{order.total}</span>
+          <>
+            <div className="card">
+              <div className="card-header">
+                <h2 className="card-title">My Orders</h2>
+              </div>
+              <div className="card-content">
+                <div className="orders-list">
+                  {userOrders.map(order => (
+                    <div key={order.id} className="order-item">
+                      <div className="order-header">
+                        <span className="order-id">Order #{order.id}</span>
+                        <span className={`order-status status-${order.status.toLowerCase()}`}>
+                          {order.status}
+                        </span>
+                      </div>
+                      <div className="order-details">
+                        <p className="order-product">{order.product}</p>
+                        <div className="order-meta">
+                          <span className="order-date">{order.date}</span>
+                          <span className="order-total">{order.total}</span>
+                        </div>
+                        {order.status === "Delivered" && (
+                          <button
+                            className="review-button"
+                            onClick={() => handleWriteReview(order)}
+                          >
+                            <Star className="review-button-icon" />
+                            Write Review
+                          </button>
+                        )}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+
+            {/* Review Modal */}
+            {showReviewModal && (
+              <div className="modal-overlay">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h3 className="modal-title">Write Review</h3>
+                    <button className="modal-close" onClick={handleCloseModal}>
+                      <X />
+                    </button>
+                  </div>
+                  
+                  <div className="modal-body">
+                    <div className="review-product-info">
+                      <h4 className="review-product-name">{selectedOrder?.product}</h4>
+                      <p className="review-order-date">Order Date: {selectedOrder?.date}</p>
+                    </div>
+
+                    <div className="rating-section">
+                      <label className="rating-label">Rating *</label>
+                      <div className="stars-container">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            className={`star-button ${star <= reviewData.rating ? 'star-filled' : 'star-empty'}`}
+                            onClick={() => handleStarClick(star)}
+                          >
+                            <Star className="star-icon" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="comment-section">
+                      <label className="comment-label">Comment</label>
+                      <textarea
+                        className="comment-textarea"
+                        placeholder="Share your experience with this product..."
+                        value={reviewData.comment}
+                        onChange={handleCommentChange}
+                        rows={4}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="modal-footer">
+                    <button className="cancel-button" onClick={handleCloseModal}>
+                      Cancel
+                    </button>
+                    <button className="submit-button" onClick={handleSubmitReview}>
+                      Submit Review
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         );
 
       case 'clients':
@@ -177,7 +284,7 @@ const UserAccount = () => {
           <div className="sidebar">
             <div className="card">
               <div className="card-header">
-                <h2 className="card-title">Account</h2>
+                <h2 className="card-title">You</h2>
               </div>
               <div className="card-content2">
                 {menuItems.map(item => {

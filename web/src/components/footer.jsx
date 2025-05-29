@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './footer.css';
 
 const Footer = () => {
@@ -9,10 +10,10 @@ const Footer = () => {
           <div className="col_footer">
             <h3>EloJobDie</h3>
             <ul>
-              <li><a href="#elojob">EloJob</a></li>
-              <li><a href="#acounts">Accounts</a></li>
-              <li><a href="#reviews">Reviews</a></li>
-              <li><a href="#coach">Coach</a></li>
+              <li><Link to="/eloboost">EloJob</Link></li>
+              <li><Link to="/Accounts">Accounts</Link></li>
+              <li><Link to="/reviews">Reviews</Link></li>
+              <li><Link to="/coach">Coach</Link></li>
             </ul>
           </div>
           <div className="col_footer">

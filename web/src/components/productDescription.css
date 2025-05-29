@@ -1,6 +1,6 @@
 .container_product_description {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 1.5rem;
     background-color: #161b22;
     color: #e6e6e6;
@@ -35,6 +35,16 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.product_stock h3 {
+    margin-bottom: 0.3rem;
+    font-size: 1.25rem;
+}
+
+.product_stock p {
+    font-size: 1rem;
+    margin: 0;
 }
 
 .product_name {

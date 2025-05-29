@@ -1,44 +1,58 @@
-import React, { useState } from 'react';
-import CartItem from './cartItem';
-import { cartProducts } from '../data/products';
+// src/pages/Cart.js
+import React from 'react';
+import CartItem from '../components/CartItem';
+import { useCart } from '../contexts/CartContext';
 import './cart.css';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState(cartProducts);
+  const { 
+    cartItems, 
+    removeFromCart, 
+    updateQuantity,
+    totalPrice,
+    clearCart
+  } = useCart();
   
-  const totalPrice = products.reduce((total, product) => {
-    return total + (product.price * product.quantity);
-  }, 0);
-  
-  const handleRemoveItem = (id) => {
-    setProducts(products.filter(product => product.id !== id));
+  const handleCheckout = () => {
+    navigate('/payment');
   };
-  
+
   return (
     <section>
       <div className="container_cart">
-        <h2>Cart</h2>
-        {products.length > 0 ? (
+        <h2>Your Cart</h2>
+        {cartItems.length > 0 ? (
           <>
             <div className="cart_items">
-              {products.map(product => (
+              {cartItems.map(product => (
                 <CartItem 
                   key={product.id} 
                   product={product} 
-                  onRemove={handleRemoveItem} 
+                  onRemove={() => removeFromCart(product.id)}
+                  onUpdateQuantity={(newQty) => updateQuantity(product.id, newQty)}
                 />
               ))}
             </div>
             <div className="cart_total">
               <h3>Total: ${totalPrice.toFixed(2)}</h3>
-              <button className="btn" onClick={() => navigate('/payment')}>Checkout</button>
+              <div className="cart_actions">
+                <button className="btn btn_clear" onClick={clearCart}>
+                  Clear Cart
+                </button>
+                <button className="btn btn_checkout" onClick={handleCheckout}>
+                  Checkout
+                </button>
+              </div>
             </div>
           </>
         ) : (
-          <div>
+          <div className="empty_cart">
             <p>Your cart is empty.</p>
+            <button className="btn" onClick={() => navigate('/')}>
+              Continue Shopping
+            </button>
           </div>
         )}
       </div>
