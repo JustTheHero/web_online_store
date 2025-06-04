@@ -141,5 +141,7 @@ npm run preview
 ```
 # The built application will be served at http://localhost:4173
 ## 7. Problems:
+* A user can buy a product without being logged in the current version.
 
 ## 8. Comments:
+* There is no user validation in the current version, this will be implemented in tthe backend. For test purposes all logged users have admin permissions.
