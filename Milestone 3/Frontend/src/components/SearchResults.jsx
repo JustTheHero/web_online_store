@@ -1,11 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductCard from './productCard';
-import './products.css'; 
+import './products.css';
 
 const SearchResults = () => {
   const location = useLocation();
-  const { products = [], query = '' } = location.state || {};
+  const { products = [], query = '', error = null } = location.state || {};
 
   return (
     <section className="products">
@@ -14,15 +14,24 @@ const SearchResults = () => {
           {query ? `Results for "${query}"` : 'Search Results'}
         </h2>
         
-        {products.length > 0 ? (
+        {error && (
+          <div className="error-message">
+            <p style={{ color: 'red', textAlign: 'center', margin: '20px 0' }}>
+              {error}
+            </p>
+          </div>
+        )}
+        
+        {!error && products.length > 0 ? (
           <div className="grid_products">
             {products.map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id || product._id} product={product} />
             ))}
           </div>
-        ) : (
+        ) : !error && (
           <div className="no-results">
             <h3>No matches found for "{query}"</h3>
+            <p>Try searching with different keywords or browse our categories.</p>
           </div>
         )}
       </div>

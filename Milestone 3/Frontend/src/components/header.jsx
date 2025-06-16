@@ -5,27 +5,60 @@ import './header.css';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
   
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
   
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
     console.log(searchQuery);
-    if(searchQuery === ''){
+    
+    if (searchQuery.trim() === '') {
       navigate('/');
       return;
     }
-    const filteredProducts = productsData.filter(product =>
-      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.category?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    console.log(filteredProducts);
-
-    navigate('/search', { state: { products: filteredProducts, query: searchQuery } });
+    
+    setIsSearching(true);
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/products'); 
+      
+      if (!response.ok) {
+        throw new Error('Error try again.');
+      }
+      
+      const allProducts = await response.json();
+      
+      const filteredProducts = allProducts.filter(product =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      
+      console.log(filteredProducts);
+      
+      navigate('/search', { 
+        state: { 
+          products: filteredProducts, 
+          query: searchQuery.trim() 
+        } 
+      });
+      
+    } catch (error) {
+      console.error(error);
+      navigate('/search', { 
+        state: { 
+          products: [], 
+          query: searchQuery.trim(),
+          error: 'Error try again.' 
+        } 
+      });
+    } finally {
+      setIsSearching(false);
+    }
   };
   
   return (
@@ -58,11 +91,13 @@ const Header = () => {
           <div className="search_bar">
             <form onSubmit={handleSearchSubmit}>
               <input 
-                type="text" 
-                placeholder="Search Products and services" 
+                type="text"
+                placeholder={isSearching ? "Searching..." : "Search Products and services"}
                 value={searchQuery}
                 onChange={handleSearchChange}
+                disabled={isSearching}
               />
+              {isSearching && <span className="search-loading">🔍</span>}
             </form>
           </div>
         </div>
