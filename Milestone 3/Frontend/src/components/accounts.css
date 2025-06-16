@@ -1,0 +1,94 @@
+.accounts {
+  padding: 70px 0;
+  background-color: #1a1f28;
+  background-image: radial-gradient(circle at top left, #152238 0%, transparent 70%), 
+                    radial-gradient(circle at bottom right, #2a1a2a 0%, transparent 70%);
+  min-height: 100vh;
+}
+
+.container_accounts {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header_accounts {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+.accounts h2 {
+  margin-bottom: 15px;
+  color: #00BFFF;
+  font-size: 2.5rem;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+}
+
+.subtitle_accounts {
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+
+
+.grid_accounts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.account_card_wrapper {
+  position: relative;
+}
+
+.account_extra_info {
+  margin-top: 10px;
+}
+
+.stock_indicator {
+  display: flex;
+  justify-content: center;
+}
+
+.stock_badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.no_products {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #b3b3b3;
+  font-size: 1.1rem;
+  background-color: #21262d;
+  border-radius: 12px;
+  border: 1px solid #30363d;
+}
+
+.reset_filters_btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #32CD32;
+  color: #0d1117;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset_filters_btn:hover {
+  background-color: #28a428;
+  transform: translateY(-2px);
+}

@@ -1,0 +1,76 @@
+.welcome {
+    height: 400px;
+    background-image: linear-gradient(rgba(13, 17, 23, 0.7), rgba(13, 17, 23, 0.7)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVo1T4XiRdHmisw0fFFP8wfF4o8wNxF9vdNw&s');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .welcome::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, transparent 30%, #0d1117 90%);
+    z-index: 1;
+  }
+  
+  .container_welcome {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .welcome h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+  }
+  
+  .welcome p {
+    font-size: 1.3rem;
+    color: #e6e6e6;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .welcome {
+      height: 350px;
+    }
+    
+    .welcome h1 {
+      font-size: 2rem;
+    }
+    
+    .welcome p {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .welcome {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .welcome h1 {
+      font-size: 1.7rem;
+    }
+  }
+

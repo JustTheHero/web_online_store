@@ -1,0 +1,133 @@
+.products {
+    padding: 70px 0;
+    background-color: #1a1f28;
+    background-image: radial-gradient(circle at top right, #152238 0%, transparent 70%), 
+                      radial-gradient(circle at bottom left, #241838 0%, transparent 70%);
+  }
+  
+  .container_products {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .products h2 {
+    margin-bottom: 40px;
+    text-align: center;
+    color: #00BFFF;
+    font-size: 2.2rem;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+  }
+  
+  .grid_products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  .card_products {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #30363d;
+    background-color: #21262d;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card_products:hover {
+    cursor: pointer;
+  }
+  
+  .card_products:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 191, 255, 0.3);
+    border-color: #00BFFF;
+  }
+  
+  .image_products {
+    height: 200px;
+    background-color: #1a1f28;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #30363d;
+  }
+  
+  .image_products img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .info_products {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .title_product {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #e6e6e6;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .price_product {
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    color: #00BFFF;
+    font-weight: bold;
+  }
+  
+  .card_products .btn {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    background-color: #30363d;
+    color: #e6e6e6;
+    margin-top: auto;
+  }
+  
+  .card_products .btn:hover {
+    background-color: #00BFFF;
+    color: #0d1117;
+  }
+  
+  @media (max-width: 1024px) {
+    .grid_products {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .grid_products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .products h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .grid_products {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .products h2 {
+      font-size: 1.5rem;
+    }
+  }
