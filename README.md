@@ -83,11 +83,13 @@ No comments.
 * Tests to the treatments of both valid and invalid data were also made.
 
 ## 5. Test Results:
-* Category and specific product pages correctly filter from the product mock.
 * Reviews are displayed and filtered correctly.
-* The shopping cart and purchase logic correctly interact with product inventory, ensuring stock updates in the browser's local storage and blocking purchase attempts that exceed available stock or are invalid.
-* It is possible to create, delete, grant admin permissions, or revoke admin rights for users correctly, with the data also being saved in the browser's local storage.
-* CRUD operations on the storage are also saved locally.
+* Users were created, read, updated and removed correctly;
+* Products were created, read, updated and removed correctly.
+* Reviews were correctly created from Delivered products.
+* Sales were correctly made and updated.
+* All admin functionalities worked.
+* A website visitor couldn't login without a existing usename/password combination.
 
 ## 6. Build Procedures:
 Prerequisites
