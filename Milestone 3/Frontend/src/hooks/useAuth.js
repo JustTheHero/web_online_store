@@ -55,7 +55,7 @@ export const useAuth = () => {
   // Consulta dados do usuário com token
   const fetchUserProfile = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/profile', {
+      const response = await fetch('https://web-backend-owo8.onrender.com/api/users/profile', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ export const useAuth = () => {
   const login = async (email, senha) => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/users/login', {
+      const response = await fetch('https://web-backend-owo8.onrender.com/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), senha: senha.trim() })
@@ -117,7 +117,7 @@ export const useAuth = () => {
   const register = async (nome, email, senha, discord = '') => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/users/register', {
+      const response = await fetch('https://web-backend-owo8.onrender.com/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome: nome.trim(), email: email.trim(), senha: senha.trim(), discord: discord.trim() })
@@ -149,7 +149,7 @@ export const useAuth = () => {
     try {
       if (!user || !user.id) throw new Error('Usuário não encontrado');
 
-      const response = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/users/${user.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedUserData)
@@ -196,7 +196,7 @@ export const useAuth = () => {
     if (!user || !user.id) return { success: false, message: 'User not authenticated' };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/sales?customerId=${user.id}`);
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales?customerId=${user.id}`);
       if (response.ok) {
         const sales = await response.json();
         return { success: true, orders: sales };
@@ -215,7 +215,7 @@ export const useAuth = () => {
     if (!user || !user.id) return { success: false, message: 'User not authenticated' };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/sales/user/${user.id}`);
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales/user/${user.id}`);
       if (response.ok) {
         const data = await response.json();
         return { success: true, stats: data.stats, orders: data.sales };

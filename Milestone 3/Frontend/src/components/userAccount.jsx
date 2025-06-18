@@ -57,7 +57,7 @@ const UserAccount = () => {
     
     setLoadingOrders(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/sales?customerId=${user.id}`);
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales?customerId=${user.id}`);
       if (response.ok) {
         const sales = await response.json();
         
@@ -65,7 +65,7 @@ const UserAccount = () => {
         const salesWithReviewStatus = await Promise.all(
           sales.map(async (sale) => {
             try {
-              const reviewResponse = await fetch(`http://localhost:5000/api/reviews/user/${user.id}`);
+              const reviewResponse = await fetch(`https://web-backend-owo8.onrender.com/api/reviews/user/${user.id}`);
               if (reviewResponse.ok) {
                 const userReviews = await reviewResponse.json();
                 const hasReview = userReviews.some(review => 
@@ -118,7 +118,7 @@ const UserAccount = () => {
     if (!user) return;
     
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${user.id}`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ const UserAccount = () => {
         comment: reviewData.comment
       };
   
-      const response = await fetch('http://localhost:5000/api/reviews', {
+      const response = await fetch('https://web-backend-owo8.onrender.com/api/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

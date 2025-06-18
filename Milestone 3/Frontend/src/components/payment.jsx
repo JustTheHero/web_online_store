@@ -168,7 +168,7 @@ const Payment = () => {
 
       // Cria uma venda para cada item do carrinho
       const salesPromises = salesData.map(async (saleData) => {
-        const response = await fetch('http://localhost:5000/api/sales', {
+        const response = await fetch('https://web-backend-owo8.onrender.com/api/sales', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

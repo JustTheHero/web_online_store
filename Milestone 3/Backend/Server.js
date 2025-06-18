@@ -9,7 +9,7 @@ app.use(cors()); // Habilita CORS para permitir requisições externas
 app.use(express.json()); // Habilita o parsing de JSON nas requisições
 
 // Conexão com o MongoDB usando a URL no .env
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGO_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

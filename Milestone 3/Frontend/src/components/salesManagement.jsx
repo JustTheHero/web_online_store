@@ -49,7 +49,7 @@ const SalesManagement = ({ onBack }) => {
       if (filters.endDate) queryParams.append('endDate', filters.endDate);
       if (filters.customerId) queryParams.append('customerId', filters.customerId);
 
-      const response = await fetch(`http://localhost:5000/api/sales?${queryParams}`);
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales?${queryParams}`);
       
       if (response.ok) {
         const data = await response.json();
@@ -73,7 +73,7 @@ const SalesManagement = ({ onBack }) => {
       if (filters.startDate) queryParams.append('startDate', filters.startDate);
       if (filters.endDate) queryParams.append('endDate', filters.endDate);
 
-      const response = await fetch(`http://localhost:5000/api/sales/stats/general?${queryParams}`);
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales/stats/general?${queryParams}`);
       
       if (response.ok) {
         const data = await response.json();
@@ -132,7 +132,7 @@ const SalesManagement = ({ onBack }) => {
   const handleSave = async (saleId) => {
     try {
       setSaving(true);
-      const response = await fetch(`http://localhost:5000/api/sales/${saleId}`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales/${saleId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ const SalesManagement = ({ onBack }) => {
 
     try {
       setSaving(true);
-      const response = await fetch(`http://localhost:5000/api/sales/${saleId}`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales/${saleId}`, {
         method: 'DELETE'
       });
 
@@ -194,7 +194,7 @@ const SalesManagement = ({ onBack }) => {
   // Atualiza apenas o status de uma venda
   const handleStatusChange = async (saleId, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/sales/${saleId}/status`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/sales/${saleId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

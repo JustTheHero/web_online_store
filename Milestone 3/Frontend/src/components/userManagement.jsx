@@ -35,7 +35,7 @@ const UserManagement = ({ onBack }) => {
       setLoading(true);
       setError(null);
       
-      const response = await fetch('http://localhost:5000/api/users/all', {
+      const response = await fetch('https://web-backend-owo8.onrender.com/api/users/all', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ const UserManagement = ({ onBack }) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/api/users/${id}`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/users/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ const UserManagement = ({ onBack }) => {
     if (!deleteConfirm) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${deleteConfirm}`, {
+      const response = await fetch(`https://web-backend-owo8.onrender.com/api/users/${deleteConfirm}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

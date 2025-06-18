@@ -29,7 +29,7 @@ const Header = () => {
     
     try {
       // Busca produtos na API
-      const response = await fetch('http://localhost:5000/api/products'); 
+      const response = await fetch('https://web-backend-owo8.onrender.com/api/products'); 
       
       if (!response.ok) {
         throw new Error('Error try again.');

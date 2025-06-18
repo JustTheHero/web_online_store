@@ -14,7 +14,7 @@ const Reviews = () => {
       try {
         setLoading(true);
         
-        const response = await fetch('http://localhost:5000/api/reviews');
+        const response = await fetch('https://web-backend-owo8.onrender.com/api/reviews');
         
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
