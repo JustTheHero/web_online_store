@@ -288,7 +288,7 @@ const UserAccount = () => {
                 </button>
                 
                 <button
-                  className="btn btn-danger"
+                  className="btn"
                   onClick={handleLogout}
                 >
                   <LogOut className="button-icon" />

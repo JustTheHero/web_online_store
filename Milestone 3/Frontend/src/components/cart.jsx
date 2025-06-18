@@ -1,6 +1,6 @@
 // src/pages/Cart.js
 import React from 'react';
-import CartItem from '../components/CartItem';
+import CartItem from '../components/cartItem';
 import { useCart } from '../contexts/CartContext';
 import './cart.css';
 import { useNavigate } from 'react-router-dom';
