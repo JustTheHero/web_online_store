@@ -78,7 +78,9 @@
 No comments.
 
 ## 4. Test Plan:
-* In milestone 3 all frontend tests were made again to ensure that there were no problems with the database integration. Many requests were made to the server, to secure the functionality of the website features with both valid and invalid data treatment. 
+* In milestone 3 all frontend tests were made again to ensure that there were no problems with the database integration.
+* Many requests were made to the server, to secure the functionality of the website features with the data received.
+* Tests to the treatments of both valid and invalid data were also made.
 
 ## 5. Test Results:
 * Category and specific product pages correctly filter from the product mock.
