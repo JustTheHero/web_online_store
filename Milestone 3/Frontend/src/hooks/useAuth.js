@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null); // Dados do usuário autenticado
+  const [loading, setLoading] = useState(true); // Flag de carregamento
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Se o usuário está autenticado
   const navigate = useNavigate();
 
   useEffect(() => {
-    checkAuthStatus();
+    checkAuthStatus(); // Verifica autenticação ao carregar hook
   }, []);
 
+  // Verifica status de autenticação baseado em localStorage
   const checkAuthStatus = async () => {
     try {
       setLoading(true);
@@ -31,6 +32,7 @@ export const useAuth = () => {
           logout();
         }
       } else if (authToken) {
+        // Tentativa de autenticar com token
         const userData = await fetchUserProfile(authToken);
         if (userData) {
           setUser(userData);
@@ -50,6 +52,7 @@ export const useAuth = () => {
     }
   };
 
+  // Consulta dados do usuário com token
   const fetchUserProfile = async (token) => {
     try {
       const response = await fetch('http://localhost:5000/api/users/profile', {
@@ -59,10 +62,7 @@ export const useAuth = () => {
         }
       });
 
-      if (response.ok) {
-        const userData = await response.json();
-        return userData;
-      } 
+      if (response.ok) return await response.json();
       return null;
     } catch (error) {
       console.error(error);
@@ -70,27 +70,21 @@ export const useAuth = () => {
     }
   };
 
+  // Faz login do usuário
   const login = async (email, senha) => {
     try {
       setLoading(true);
-      
       const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), senha: senha.trim() })
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Salvar token se fornecido
-        if (data.token) {
-          localStorage.setItem('authToken', data.token);
-        }
-        
-        // Processar dados do usuário
+        if (data.token) localStorage.setItem('authToken', data.token);
+
         const userData = data.user || {
           id: data.id,
           nome: data.nome || '',
@@ -99,14 +93,11 @@ export const useAuth = () => {
           isAdmin: data.isAdmin || false
         };
 
-        // Validar dados antes de salvar
         if (userData.id && userData.email) {
           localStorage.setItem('user', JSON.stringify(userData));
           setUser(userData);
           setIsAuthenticated(true);
-          
           console.log('Login realizado com sucesso:', userData.email);
-          
           return { success: true, user: userData };
         } else {
           return { success: false, message: 'Dados do usuário inválidos' };
@@ -122,32 +113,20 @@ export const useAuth = () => {
     }
   };
 
+  // Cria novo usuário e loga após o registro
   const register = async (nome, email, senha, discord = '') => {
     try {
       setLoading(true);
-      
       const response = await fetch('http://localhost:5000/api/users/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 
-          nome: nome.trim(), 
-          email: email.trim(), 
-          senha: senha.trim(),
-          discord: discord.trim()
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: nome.trim(), email: email.trim(), senha: senha.trim(), discord: discord.trim() })
       });
 
       const data = await response.json();
 
-      if (response.ok) {
-        // Após registrar, fazer login automaticamente
-        const loginResult = await login(email, senha);
-        return loginResult;
-      } else {
-        return { success: false, message: data.message || 'Erro ao criar conta' };
-      }
+      if (response.ok) return await login(email, senha);
+      return { success: false, message: data.message || 'Erro ao criar conta' };
     } catch (error) {
       console.error(error);
       return { success: false, message: 'Erro de conexão. Tente novamente.' };
@@ -156,6 +135,7 @@ export const useAuth = () => {
     }
   };
 
+  // Remove dados do usuário local e desloga
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
@@ -164,56 +144,43 @@ export const useAuth = () => {
     console.log('Logout realizado');
   };
 
+  // Atualiza dados do usuário
   const updateUser = async (updatedUserData) => {
     try {
-      if (!user || !user.id) {
-        throw new Error('Usuário não encontrado');
-      }
+      if (!user || !user.id) throw new Error('Usuário não encontrado');
 
-      // Atualizar no servidor
       const response = await fetch(`http://localhost:5000/api/users/${user.id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedUserData)
       });
 
       if (response.ok) {
         const serverUpdatedUser = await response.json();
-        
-        // Mesclar dados do servidor com dados locais
-        const newUserData = { 
-          ...user, 
-          ...serverUpdatedUser,
-          // Manter ID original se não foi retornado
-          id: serverUpdatedUser.id || user.id
-        };
-        
+        const newUserData = { ...user, ...serverUpdatedUser, id: serverUpdatedUser.id || user.id };
         setUser(newUserData);
         localStorage.setItem('user', JSON.stringify(newUserData));
-        
         return { success: true, user: newUserData };
       } else {
         const errorData = await response.json();
-        return { success: false, message: errorData.message || 'Error updating user' };
+        return { success: false, message: errorData.message || 'Erro ao atualizar usuário' };
       }
     } catch (error) {
       console.error(error);
-      return { success: false, message: 'Error connection. Try again.' };
+      return { success: false, message: 'Erro de conexão. Tente novamente.' };
     }
   };
 
+  // Verifica se o usuário está logado, senão redireciona
   const requireAuth = (redirectTo = '/loginSection') => {
     if (!loading && !isAuthenticated) {
-      navigate(redirectTo, {
-        state: { from: window.location.pathname }
-      });
+      navigate(redirectTo, { state: { from: window.location.pathname } });
       return false;
     }
     return isAuthenticated;
   };
 
+  // Verifica se o usuário é admin
   const requireAdmin = (redirectTo = '/') => {
     if (!loading && (!isAuthenticated || !user?.isAdmin)) {
       navigate(redirectTo, {
@@ -224,48 +191,45 @@ export const useAuth = () => {
     return isAuthenticated && user?.isAdmin;
   };
 
+  // Consulta os pedidos (sales) do usuário autenticado
   const getUserOrders = async () => {
-    if (!user || !user.id) {
-      return { success: false, message: 'User not authenticated' };
-    }
+    if (!user || !user.id) return { success: false, message: 'User not authenticated' };
 
     try {
       const response = await fetch(`http://localhost:5000/api/sales?customerId=${user.id}`);
-      
       if (response.ok) {
         const sales = await response.json();
         return { success: true, orders: sales };
       } else {
         const errorData = await response.json();
-        return { success: false, message: errorData.message || 'Error fetching orders' };
+        return { success: false, message: errorData.message || 'Erro ao buscar pedidos' };
       }
     } catch (error) {
       console.error(error);
-      return { success: false, message: 'Error connection. Try again.' };
+      return { success: false, message: 'Erro de conexão. Tente novamente.' };
     }
   };
 
+  // Consulta estatísticas de compras do usuário
   const getUserStats = async () => {
-    if (!user || !user.id) {
-      return { success: false, message: 'User not authenticated' };
-    }
+    if (!user || !user.id) return { success: false, message: 'User not authenticated' };
 
     try {
       const response = await fetch(`http://localhost:5000/api/sales/user/${user.id}`);
-      
       if (response.ok) {
         const data = await response.json();
         return { success: true, stats: data.stats, orders: data.sales };
       } else {
         const errorData = await response.json();
-        return { success: false, message: errorData.message || 'Error fetching statistics' };
+        return { success: false, message: errorData.message || 'Erro ao buscar estatísticas' };
       }
     } catch (error) {
       console.error(error);
-      return { success: false, message: 'Error connection. Try again.' };
+      return { success: false, message: 'Erro de conexão. Tente novamente.' };
     }
   };
 
+  // Verifica se usuário está autenticado com dados válidos
   const isUserAuthenticated = () => {
     return !loading && isAuthenticated && user;
   };

@@ -1,7 +1,7 @@
 import React from 'react';
 import './welcome.css';
 import { useNavigate } from 'react-router-dom';
-
+//paginá para estética da home page
 const Welcome = () => {
     const navigate = useNavigate();
   

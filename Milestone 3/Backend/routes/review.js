@@ -4,23 +4,15 @@ const Review = require("../models/Review");
 const Sales = require("../models/Sales");
 const User = require("../models/Users");
 
+// Busca reviews com filtros, paginação e ordenação
 router.get("/", async (req, res) => {
   try {
     const { 
-      productId, 
-      userId, 
-      rating, 
-      isVerified, 
-      startDate, 
-      endDate,
-      limit = 50,
-      offset = 0,
-      sortBy = 'timestamp',
-      sortOrder = 'desc'
+      productId, userId, rating, isVerified, startDate, endDate,
+      limit = 50, offset = 0, sortBy = 'timestamp', sortOrder = 'desc'
     } = req.query;
 
     let query = {};
-
     if (productId) query.productId = productId;
     if (userId) query.userId = userId;
     if (rating) query.rating = parseInt(rating);
@@ -34,6 +26,7 @@ router.get("/", async (req, res) => {
     const sortObj = {};
     sortObj[sortBy] = sortOrder === 'desc' ? -1 : 1;
 
+    // Busca reviews com dados populados de pedido e usuário
     const reviews = await Review.find(query)
       .populate('orderId', 'productName productId totalPrice status timestamp username')
       .populate('userId', 'name username email')
@@ -58,11 +51,13 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Busca reviews de um produto específico, com estatísticas de notas
 router.get("/product/:productId", async (req, res) => {
   try {
     const { productId } = req.params;
     const { limit = 20, offset = 0 } = req.query;
 
+    // Reviews do produto com dados de usuário e pedido populados
     const reviews = await Review.find({ productId })
       .populate('userId', 'name username')
       .populate('orderId', 'status timestamp')
@@ -72,6 +67,7 @@ router.get("/product/:productId", async (req, res) => {
 
     const total = await Review.countDocuments({ productId });
 
+    // Estatísticas agregadas das avaliações do produto
     const stats = await Review.aggregate([
       { $match: { productId } },
       {
@@ -79,13 +75,12 @@ router.get("/product/:productId", async (req, res) => {
           _id: null,
           averageRating: { $avg: '$rating' },
           totalReviews: { $sum: 1 },
-          ratingCounts: {
-            $push: '$rating'
-          }
+          ratingCounts: { $push: '$rating' }
         }
       }
     ]);
 
+    // Formatação dos dados estatísticos para resposta
     const productStats = stats[0] ? {
       averageRating: Math.round(stats[0].averageRating * 10) / 10,
       totalReviews: stats[0].totalReviews,
@@ -118,6 +113,7 @@ router.get("/product/:productId", async (req, res) => {
   }
 });
 
+// Busca todas as reviews feitas por um usuário
 router.get("/user/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -133,41 +129,30 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
+// Cria nova review validando dados e status do pedido
 router.post('/', async (req, res) => {
   try {
     const { orderId, userId, productId, rating, comment } = req.body;
+
     if (!orderId || !userId || !productId || !rating) {
-      return res.status(400).json({ 
-        message: "Campos obrigatórios: orderId, userId, productId, rating" 
-      });
+      return res.status(400).json({ message: "Campos obrigatórios: orderId, userId, productId, rating" });
     }
 
     if (rating < 1 || rating > 5) {
-      return res.status(400).json({ 
-        message: "Rating deve ser entre 1 e 5" 
-      });
+      return res.status(400).json({ message: "Rating deve ser entre 1 e 5" });
     }
 
     const sale = await Sales.findById(orderId);
-    if (!sale) {
-      return res.status(404).json({ message: "Venda não encontrada" });
-    }
+    if (!sale) return res.status(404).json({ message: "Venda não encontrada" });
+
     const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "Usuário não encontrado" });
-    }
+    if (!user) return res.status(404).json({ message: "Usuário não encontrado" });
 
     const existingReview = await Review.findOne({ orderId, userId });
-    if (existingReview) {
-      return res.status(400).json({ 
-        message: "Usuário já avaliou este pedido" 
-      });
-    }
+    if (existingReview) return res.status(400).json({ message: "Usuário já avaliou este pedido" });
 
     if (sale.status !== 'completed') {
-      return res.status(400).json({ 
-        message: "Só é possível avaliar pedidos concluídos" 
-      });
+      return res.status(400).json({ message: "Só é possível avaliar pedidos concluídos" });
     }
 
     const reviewData = {
@@ -186,8 +171,6 @@ router.post('/', async (req, res) => {
     await savedReview.populate('orderId', 'productName productId totalPrice status timestamp');
     await savedReview.populate('userId', 'name username email');
 
-    console.log('Review criada com sucesso:', savedReview._id);
-    
     res.status(201).json({
       message: 'Review criada com sucesso',
       review: savedReview
@@ -196,27 +179,21 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.error('Erro ao criar review:', error);
     if (error.code === 11000) {
-      res.status(400).json({ 
-        message: 'Usuário já avaliou este pedido' 
-      });
+      res.status(400).json({ message: 'Usuário já avaliou este pedido' });
     } else {
-      res.status(500).json({ 
-        message: 'Erro interno do servidor',
-        error: error.message 
-      });
+      res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
     }
   }
 });
 
+// Busca review específica pelo ID com dados relacionados
 router.get('/:id', async (req, res) => {
   try {
     const review = await Review.findById(req.params.id)
       .populate('orderId', 'productName productId totalPrice status timestamp username')
       .populate('userId', 'name username email');
     
-    if (!review) {
-      return res.status(404).json({ message: "Review não encontrada" });
-    }
+    if (!review) return res.status(404).json({ message: "Review não encontrada" });
     
     res.json(review);
   } catch (error) {
@@ -225,31 +202,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Atualiza campos selecionados da review (rating, comentário, verificação)
 router.put('/:id', async (req, res) => {
   try {
     const { rating, comment, isVerified } = req.body;
     const updateData = {};
+
     if (rating !== undefined) {
-      if (rating < 1 || rating > 5) {
-        return res.status(400).json({ 
-          message: "Rating deve ser entre 1 e 5" 
-        });
-      }
+      if (rating < 1 || rating > 5) return res.status(400).json({ message: "Rating deve ser entre 1 e 5" });
       updateData.rating = rating;
     }
 
     if (comment !== undefined) {
-      if (comment.length > 1000) {
-        return res.status(400).json({ 
-          message: "Comentário deve ter no máximo 1000 caracteres" 
-        });
-      }
+      if (comment.length > 1000) return res.status(400).json({ message: "Comentário deve ter no máximo 1000 caracteres" });
       updateData.comment = comment;
     }
 
-    if (isVerified !== undefined) {
-      updateData.isVerified = isVerified;
-    }
+    if (isVerified !== undefined) updateData.isVerified = isVerified;
 
     updateData.updatedAt = new Date();
 
@@ -257,54 +226,36 @@ router.put('/:id', async (req, res) => {
       req.params.id,
       updateData,
       { new: true, runValidators: true }
-    ).populate('orderId', 'productName productId totalPrice status timestamp')
-     .populate('userId', 'name username email');
+    )
+      .populate('orderId', 'productName productId totalPrice status timestamp')
+      .populate('userId', 'name username email');
 
-    if (!updatedReview) {
-      return res.status(404).json({ message: "Review não encontrada" });
-    }
+    if (!updatedReview) return res.status(404).json({ message: "Review não encontrada" });
 
-    console.log('Review atualizada:', updatedReview._id);
-    
-    res.json({
-      message: 'Review atualizada com sucesso',
-      review: updatedReview
-    });
+    res.json({ message: 'Review atualizada com sucesso', review: updatedReview });
 
   } catch (error) {
     console.error('Erro ao atualizar review:', error);
-    res.status(500).json({ 
-      message: 'Erro interno do servidor',
-      error: error.message 
-    });
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
 
+// Deleta uma review pelo ID
 router.delete('/:id', async (req, res) => {
   try {
     const deletedReview = await Review.findByIdAndDelete(req.params.id);
 
-    if (!deletedReview) {
-      return res.status(404).json({ message: "Review não encontrada" });
-    }
+    if (!deletedReview) return res.status(404).json({ message: "Review não encontrada" });
 
-    console.log('Review deletada:', deletedReview._id);
-    
-    res.json({
-      message: 'Review deletada com sucesso',
-      review: deletedReview
-    });
+    res.json({ message: 'Review deletada com sucesso', review: deletedReview });
 
   } catch (error) {
     console.error('Erro ao deletar review:', error);
-    res.status(500).json({ 
-      message: 'Erro interno do servidor',
-      error: error.message 
-    });
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
 
-
+// Estatísticas gerais de reviews, podendo filtrar por produto e datas
 router.get('/stats/general', async (req, res) => {
   try {
     const { productId, startDate, endDate } = req.query;
@@ -324,19 +275,11 @@ router.get('/stats/general', async (req, res) => {
           _id: null,
           totalReviews: { $sum: 1 },
           averageRating: { $avg: '$rating' },
-          verifiedReviews: {
-            $sum: { $cond: ['$isVerified', 1, 0] }
-          },
-          reportedReviews: {
-            $sum: { $cond: ['$reported', 1, 0] }
-          },
+          verifiedReviews: { $sum: { $cond: ['$isVerified', 1, 0] } },
+          reportedReviews: { $sum: { $cond: ['$reported', 1, 0] } },
           totalHelpful: { $sum: '$helpful' },
-          ratingDistribution: {
-            $push: '$rating'
-          },
-          reviewsWithComments: {
-            $sum: { $cond: [{ $gt: [{ $strLenCP: '$comment' }, 0] }, 1, 0] }
-          }
+          ratingDistribution: { $push: '$rating' },
+          reviewsWithComments: { $sum: { $cond: [{ $gt: [{ $strLenCP: '$comment' }, 0] }, 1, 0] } }
         }
       },
       {
@@ -349,46 +292,11 @@ router.get('/stats/general', async (req, res) => {
           totalHelpful: 1,
           reviewsWithComments: 1,
           ratingDistribution: {
-            5: {
-              $size: {
-                $filter: {
-                  input: '$ratingDistribution',
-                  cond: { $eq: ['$this', 5] }
-                }
-              }
-            },
-            4: {
-              $size: {
-                $filter: {
-                  input: '$ratingDistribution',
-                  cond: { $eq: ['$this', 4] }
-                }
-              }
-            },
-            3: {
-              $size: {
-                $filter: {
-                  input: '$ratingDistribution',
-                  cond: { $eq: ['$this', 3] }
-                }
-              }
-            },
-            2: {
-              $size: {
-                $filter: {
-                  input: '$ratingDistribution',
-                  cond: { $eq: ['$this', 2] }
-                }
-              }
-            },
-            1: {
-              $size: {
-                $filter: {
-                  input: '$ratingDistribution',
-                  cond: { $eq: ['$this', 1] }
-                }
-              }
-            }
+            5: { $size: { $filter: { input: '$ratingDistribution', cond: { $eq: ['$this', 5] } } } },
+            4: { $size: { $filter: { input: '$ratingDistribution', cond: { $eq: ['$this', 4] } } } },
+            3: { $size: { $filter: { input: '$ratingDistribution', cond: { $eq: ['$this', 3] } } } },
+            2: { $size: { $filter: { input: '$ratingDistribution', cond: { $eq: ['$this', 2] } } } },
+            1: { $size: { $filter: { input: '$ratingDistribution', cond: { $eq: ['$this', 1] } } } }
           }
         }
       }
@@ -411,6 +319,7 @@ router.get('/stats/general', async (req, res) => {
   }
 });
 
+// Retorna os top produtos com melhor avaliação (mínimo 3 reviews)
 router.get('/stats/top-products', async (req, res) => {
   try {
     const { limit = 10 } = req.query;
@@ -425,11 +334,7 @@ router.get('/stats/top-products', async (req, res) => {
           totalHelpful: { $sum: '$helpful' }
         }
       },
-      {
-        $match: {
-          totalReviews: { $gte: 3 }
-        }
-      },
+      { $match: { totalReviews: { $gte: 3 } } },
       {
         $project: {
           productId: '$_id',

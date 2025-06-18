@@ -44,7 +44,6 @@
 
 
 
-/* Estilos herdados dos cards de produto */
 .card_products {
   border-radius: 12px;
   overflow: hidden;
@@ -149,7 +148,6 @@
   box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4);
 }
 
-/* Responsividade */
 @media (max-width: 1024px) {
   .grid_eloboost {
     grid-template-columns: repeat(2, 1fr);

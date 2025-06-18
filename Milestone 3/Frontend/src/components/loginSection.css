@@ -1,13 +1,4 @@
-/* Dark theme color scheme with cyan accent color (#00BFFF) */
-        /* Main layout uses flexbox for alignment and responsive design */
-        /* Neon effect created with text-shadow and box-shadow properties */
-
-        /* Responsive design breakpoints:
-           - 900px: Changes header layout to be more vertical
-           - 768px: Adjusts navigation for smaller screens
-           - 600px: Simplifies footer and login container
-           - 480px: Reduces font sizes and padding for very small screens */
-           * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -252,7 +243,6 @@
             font-size: 0.875rem;
         }
         
-        /* Responsive styles */
         @media (max-width: 900px) {
             .container_header {
                 justify-content: center;

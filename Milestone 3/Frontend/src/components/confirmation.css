@@ -53,7 +53,6 @@
     margin-bottom: 2rem;
 }
 
-/* Estilos dos Detalhes do Pedido */
 .order_details, .payment_details {
     background-color: #21262d;
     padding: 1.5rem;
@@ -147,7 +146,6 @@
     font-size: 1.5rem;
 }
 
-/* Estilos dos Detalhes do Pagamento */
 .card_details {
     display: flex;
     align-items: center;
@@ -230,7 +228,6 @@
     line-height: 1.5;
 }
 
-/* Botões de Ação */
 .confirmation_actions {
     display: flex;
     justify-content: center;
@@ -273,7 +270,6 @@
     box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
 }
 
-/* Responsividade */
 @media (max-width: 900px) {
     .confirmation_content {
         grid-template-columns: 1fr;

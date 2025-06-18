@@ -4,38 +4,46 @@ import { useAuth } from '../hooks/useAuth';
 import './salesManagement.css';
 
 const SalesManagement = ({ onBack }) => {
+  // Estados principais do componente
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState(null); // ID da venda sendo editada
   const [selectedSale, setSelectedSale] = useState(null);
-  const [editData, setEditData] = useState({});
+  const [editData, setEditData] = useState({}); // Dados temporários durante edição
+  
+  // Filtros para busca
   const [filters, setFilters] = useState({
     status: '',
     startDate: '',
     endDate: '',
     customerId: ''
   });
-  const [stats, setStats] = useState(null);
+  
+  const [stats, setStats] = useState(null); // Estatísticas das vendas
 
   const { user: currentUser, requireAdmin } = useAuth();
 
+  // Verifica permissão de admin
   useEffect(() => {
     if (!requireAdmin()) {
       return;
     }
   }, [requireAdmin]);
 
+  // Carrega vendas e estatísticas quando filtros mudam
   useEffect(() => {
     loadSales();
     loadStats();
   }, [filters]);
 
+  // Busca vendas na API com filtros aplicados
   const loadSales = async () => {
     try {
       setLoading(true);
       const queryParams = new URLSearchParams();
       
+      // Aplica filtros na query
       if (filters.status) queryParams.append('status', filters.status);
       if (filters.startDate) queryParams.append('startDate', filters.startDate);
       if (filters.endDate) queryParams.append('endDate', filters.endDate);
@@ -58,6 +66,7 @@ const SalesManagement = ({ onBack }) => {
     }
   };
 
+  // Carrega estatísticas gerais das vendas
   const loadStats = async () => {
     try {
       const queryParams = new URLSearchParams();
@@ -76,6 +85,7 @@ const SalesManagement = ({ onBack }) => {
     }
   };
 
+  // Exibe notificação temporária
   const showToast = (message, type = 'success') => {
     const toast = document.createElement('div');
     toast.textContent = message;
@@ -106,6 +116,7 @@ const SalesManagement = ({ onBack }) => {
     }
   };
 
+  // Inicia modo de edição para uma venda
   const handleEdit = (sale) => {
     setEditingId(sale._id);
     setEditData({
@@ -117,6 +128,7 @@ const SalesManagement = ({ onBack }) => {
     });
   };
 
+  // Salva alterações da venda editada
   const handleSave = async (saleId) => {
     try {
       setSaving(true);
@@ -146,6 +158,7 @@ const SalesManagement = ({ onBack }) => {
     }
   };
 
+  // Deleta uma venda após confirmação
   const handleDelete = async (saleId) => {
     if (!window.confirm('Tem certeza que deseja deletar esta venda?')) {
       return;
@@ -173,13 +186,12 @@ const SalesManagement = ({ onBack }) => {
     }
   };
 
-  
-
   const handleViewDetails = (sale) => {
     setSelectedSale(sale);
     setShowDetailsModal(true);
   };
 
+  // Atualiza apenas o status de uma venda
   const handleStatusChange = async (saleId, newStatus) => {
     try {
       const response = await fetch(`http://localhost:5000/api/sales/${saleId}/status`, {
@@ -204,10 +216,12 @@ const SalesManagement = ({ onBack }) => {
     }
   };
 
+  // Atualiza dados temporários durante edição
   const updateEditData = (field, value) => {
     setEditData(prev => ({ ...prev, [field]: value }));
   };
 
+  // Mapeia cores para cada status
   const getStatusColor = (status) => {
     const colors = {
       pending: '#f59e0b',
@@ -218,6 +232,7 @@ const SalesManagement = ({ onBack }) => {
     return colors[status] || '#6b7280';
   };
 
+  // Traduz status para exibição
   const getStatusText = (status) => {
     const texts = {
       pending: 'Pending',
@@ -228,10 +243,12 @@ const SalesManagement = ({ onBack }) => {
     return texts[status] || status;
   };
 
+  // Formata data para padrão brasileiro
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString('pt-BR');
   };
 
+  // Formata valores monetários em Real
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -239,11 +256,11 @@ const SalesManagement = ({ onBack }) => {
     }).format(value);
   };
 
-  
   return (
     <div className="sales-container">
       <div className="sales-wrapper">
         <div className="sales-card">
+          {/* Cabeçalho com botão voltar e título */}
           <div className="sales-header">
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <button className="btn" onClick={handleBack}>
@@ -256,10 +273,10 @@ const SalesManagement = ({ onBack }) => {
               <button className="btn" onClick={loadSales} disabled={saving}>
                 Update
               </button>
- 
             </div>
           </div>
 
+          {/* Cards de estatísticas */}
           {stats && (
             <div className="stats-container">
               <div className="stat-card">
@@ -281,6 +298,7 @@ const SalesManagement = ({ onBack }) => {
             </div>
           )}
 
+          {/* Tabela de vendas */}
           <div className="sales-content">
             {sales.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '40px' }}>
@@ -304,6 +322,7 @@ const SalesManagement = ({ onBack }) => {
                   <tbody>
                     {sales.map(sale => (
                       <tr key={sale._id}>
+                        {/* Células editáveis quando em modo de edição */}
                         <td>
                           {editingId === sale._id ? (
                             <input
@@ -377,6 +396,7 @@ const SalesManagement = ({ onBack }) => {
                         </td>
                         <td>{formatDate(sale.timestamp)}</td>
                         <td>
+                          {/* Botões de ação: editar/salvar e deletar */}
                           <div className="actions-container">
                             {editingId === sale._id ? (
                               <button

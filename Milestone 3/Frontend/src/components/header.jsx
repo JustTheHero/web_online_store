@@ -4,18 +4,22 @@ import { ShoppingCart, User } from 'lucide-react';
 import './header.css';
 
 const Header = () => {
+  // Estados para controle da busca
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
   
+  // Atualiza valor do campo de busca
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
   
+  // Processa envio da busca
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     console.log(searchQuery);
     
+    // Redireciona para home se busca vazia
     if (searchQuery.trim() === '') {
       navigate('/');
       return;
@@ -24,6 +28,7 @@ const Header = () => {
     setIsSearching(true);
     
     try {
+      // Busca produtos na API
       const response = await fetch('http://localhost:5000/api/products'); 
       
       if (!response.ok) {
@@ -32,6 +37,7 @@ const Header = () => {
       
       const allProducts = await response.json();
       
+      // Filtra produtos por título, descrição ou categoria
       const filteredProducts = allProducts.filter(product =>
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -40,6 +46,7 @@ const Header = () => {
       
       console.log(filteredProducts);
       
+      // Navega para página de resultados com dados
       navigate('/search', { 
         state: { 
           products: filteredProducts, 
@@ -49,6 +56,7 @@ const Header = () => {
       
     } catch (error) {
       console.error(error);
+      // Navega para página de resultados com erro
       navigate('/search', { 
         state: { 
           products: [], 
@@ -64,6 +72,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container_header">
+        {/* Logo e navegação principal */}
         <div className="logo-nav-group">
           <div className="logo">
             <Link to="/">EloJob<span>Die</span></Link>
@@ -77,7 +86,10 @@ const Header = () => {
             </ul>
           </div>
         </div>
+        
+        {/* Menu superior com ícones e busca */}
         <div className="top_menu">
+          {/* Ícones de navegação */}
           <div className="icons_navigation">
             <Link to="/cart" className="icon-link">
               <ShoppingCart size={20} />
@@ -88,6 +100,8 @@ const Header = () => {
               <span>Account</span>
             </Link>
           </div>
+          
+          {/* Barra de busca */}
           <div className="search_bar">
             <form onSubmit={handleSearchSubmit}>
               <input 

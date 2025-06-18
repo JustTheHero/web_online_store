@@ -314,7 +314,6 @@
   text-shadow: 0 0 5px rgba(0, 191, 255, 0.3);
 }
 
-/* Review Button Styles */
 .review-button {
   display: flex;
   align-items: center;
@@ -346,7 +345,6 @@
   width: 1rem;
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;

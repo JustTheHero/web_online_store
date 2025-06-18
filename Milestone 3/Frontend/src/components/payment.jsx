@@ -15,6 +15,7 @@ const Payment = () => {
   
   const { user, loading, isAuthenticated, requireAuth } = useAuth();
   
+  // Estados para dados do cartão
   const [cardData, setCardData] = useState({
     number: '',
     name: '',
@@ -22,6 +23,7 @@ const Payment = () => {
     cvv: ''
   });
   
+  // Estados para dados adicionais do usuário
   const [userData, setUserData] = useState({
     username: '',
     password: ''
@@ -33,8 +35,10 @@ const Payment = () => {
   const [userSubmitted, setUserSubmitted] = useState(false);
   const [processing, setProcessing] = useState(false);
   
+  // Controla o passo atual do pagamento (cartão ou confirmação)
   const [paymentStep, setPaymentStep] = useState('card-details');
 
+  // Verifica autenticação e redireciona se necessário
   useEffect(() => {
     if (!loading) {
       const isAuthValid = requireAuth('/loginSection');
@@ -50,11 +54,13 @@ const Payment = () => {
     }
   }, [loading, isAuthenticated, requireAuth, navigate]);
 
+  // Manipula mudanças nos campos do cartão com formatação
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     
     let formattedValue = value;
     
+    // Formatação específica para cada campo
     if (name === 'number') {
       formattedValue = value.replace(/\D/g, '').slice(0, 16);
     } else if (name === 'expiry') {
@@ -72,6 +78,7 @@ const Payment = () => {
       [name]: formattedValue
     });
     
+    // Remove erro quando usuário começa a digitar
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -80,6 +87,7 @@ const Payment = () => {
     }
   };
   
+  // Manipula mudanças nos campos de dados do usuário
   const handleUserInputChange = (e) => {
     const { name, value } = e.target;
     
@@ -96,6 +104,7 @@ const Payment = () => {
     }
   };
 
+  // Valida dados do cartão
   const validateForm = () => {
     const newErrors = {};
     
@@ -119,6 +128,7 @@ const Payment = () => {
     return Object.keys(newErrors).length === 0;
   };
   
+  // Valida dados adicionais do usuário
   const validateUserForm = () => {
     const newErrors = {};
     
@@ -134,6 +144,7 @@ const Payment = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Processa o pagamento criando vendas na API
   const processPayment = async () => {
     try {
       const token = localStorage.getItem('authToken');
@@ -142,7 +153,7 @@ const Payment = () => {
         throw new Error('User data not found');
       }
       
-      console.log('User ID:', user.id);
+      // Prepara dados das vendas para cada item do carrinho
       const salesData = items.map(item => ({
         productId: item.productId,
         productName: item.product.name || item.product.title,
@@ -155,8 +166,7 @@ const Payment = () => {
         status: 'pending'
       }));
 
-      console.log('Sales data to be sent:', salesData);
-
+      // Cria uma venda para cada item do carrinho
       const salesPromises = salesData.map(async (saleData) => {
         const response = await fetch('http://localhost:5000/api/sales', {
           method: 'POST',
@@ -193,6 +203,7 @@ const Payment = () => {
     }
   };
 
+  // Submete dados do cartão e avança para confirmação
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -202,6 +213,7 @@ const Payment = () => {
     }
   };
   
+  // Submete confirmação final e processa pagamento
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
     setUserSubmitted(true);
@@ -218,6 +230,7 @@ const Payment = () => {
       if (result.success) {
         clearCart();
         
+        // Navega para página de confirmação com todos os dados
         navigate('/confirmation', {
           state: {
             paymentInfo: {
@@ -245,14 +258,17 @@ const Payment = () => {
     }
   };
   
+  // Formata número do cartão com espaços
   const formatCardNumber = (number) => {
     return number.replace(/(\d{4})/g, '$1 ').trim();
   };
   
+  // Extrai últimos 4 dígitos do cartão
   const getLastFourDigits = (number) => {
     return number.slice(-4);
   };
   
+  // Navega de volta baseado no passo atual
   const handleGoBack = () => {
     if (paymentStep === 'confirmation') {
       setPaymentStep('card-details');
@@ -262,6 +278,7 @@ const Payment = () => {
     }
   };
 
+  // Estados de loading e autenticação
   if (loading) {
     return (
       <section>
@@ -277,6 +294,8 @@ const Payment = () => {
   if (!isAuthenticated || !user) {
     return null;
   }
+
+  // Verifica se há itens no carrinho
   if (!items || items.length === 0) {
     return (
       <section>
@@ -306,6 +325,7 @@ const Payment = () => {
         <h1 className="payment_title">Finalize your purchase</h1>
         
         <div className="payment_content">
+          {/* Resumo do pedido */}
           <div className="payment_summary">
             <h2>Order Summary</h2>
             
@@ -338,8 +358,10 @@ const Payment = () => {
             </div>
           </div>
           
+          {/* Formulário de pagamento com dois passos */}
           <div className="payment_form_container">
             {paymentStep === 'card-details' ? (
+              // Passo 1: Dados do cartão
               <>
                 <h2>Payment Details</h2>
                 
@@ -422,9 +444,11 @@ const Payment = () => {
                 </form>
               </>
             ) : (
+              // Passo 2: Confirmação e dados adicionais
               <>
                 <h2>Payment Confirmation</h2>
                 
+                {/* Resumo do cartão */}
                 <div className="card_summary">
                   <div className="card_summary_icon">
                     <i className="card_icon"></i>

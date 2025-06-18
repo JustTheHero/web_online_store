@@ -4,12 +4,15 @@ import ApiService from '../data/api';
 import './storage.css';
 
 const Storage = ({ onBack }) => {
+  // Estados principais do componente
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState(null); // ID do produto sendo editado
   const [showAddModal, setShowAddModal] = useState(false);
-  const [editData, setEditData] = useState({});
+  const [editData, setEditData] = useState({}); // Dados temporários durante edição
+  
+  // Estado para novo produto no modal
   const [newProduct, setNewProduct] = useState({
     title: '',
     price: '',
@@ -19,10 +22,12 @@ const Storage = ({ onBack }) => {
     description: ''
   });
 
+  // Carrega produtos ao montar componente
   useEffect(() => {
     loadProducts();
   }, []);
 
+  // Busca produtos na API
   const loadProducts = async () => {
     try {
       setLoading(true);
@@ -37,6 +42,7 @@ const Storage = ({ onBack }) => {
     }
   };
 
+  // Exibe notificação temporária
   const showToast = (message, type = 'success') => {
     const toast = document.createElement('div');
     toast.textContent = message;
@@ -58,6 +64,7 @@ const Storage = ({ onBack }) => {
       }
     }, 3000);
   };
+
   const handleBack = () => {
     if (onBack && typeof onBack === 'function') {
       onBack();
@@ -65,6 +72,8 @@ const Storage = ({ onBack }) => {
       window.history.back();
     }
   };
+
+  // Inicia modo de edição para um produto
   const handleEdit = (product) => {
     setEditingId(product._id);
     setEditData({
@@ -77,6 +86,7 @@ const Storage = ({ onBack }) => {
     });
   };
 
+  // Salva alterações do produto editado
   const handleSave = async (productId) => {
     try {
       setSaving(true);
@@ -93,6 +103,7 @@ const Storage = ({ onBack }) => {
     }
   };
 
+  // Deleta produto após confirmação
   const handleDelete = async (productId) => {
     if (!window.confirm('Tem certeza que deseja deletar este produto?')) {
       return;
@@ -111,6 +122,7 @@ const Storage = ({ onBack }) => {
     }
   };
 
+  // Adiciona novo produto via modal
   const handleAddProduct = async () => {
     if (!newProduct.title.trim()) {
       showToast('Nome do produto é obrigatório', 'error');
@@ -148,10 +160,12 @@ const Storage = ({ onBack }) => {
     }
   };
 
+  // Atualiza dados temporários durante edição
   const updateEditData = (field, value) => {
     setEditData(prev => ({ ...prev, [field]: value }));
   };
 
+  // Tela de loading
   if (loading) {
     return (
       <div style={{ 
@@ -172,17 +186,14 @@ const Storage = ({ onBack }) => {
     <div className="storage-container">
       <div className="storage-wrapper">
         <div className="storage-card">
+          {/* Cabeçalho com navegação e ações */}
           <div className="storage-header">
-            <button
-                className="btn"
-                onClick={handleBack}
-              >
-                <ArrowLeft size={18} />
-                <span style={{ marginLeft: '0.5rem' }}>Voltar</span>
-              </button>
-            <h1 sclassName="storage-title">Products Management</h1>
+            <button className="btn" onClick={handleBack}>
+              <ArrowLeft size={18} />
+              <span style={{ marginLeft: '0.5rem' }}>Voltar</span>
+            </button>
+            <h1 className="storage-title">Products Management</h1>
             <div className="header-buttons">
-
               <button 
                 className="btn"
                 onClick={loadProducts}
@@ -201,6 +212,7 @@ const Storage = ({ onBack }) => {
             </div>
           </div>
           
+          {/* Tabela de produtos */}
           <div className="storage-content">
             {products.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '40px' }}>
@@ -223,6 +235,7 @@ const Storage = ({ onBack }) => {
                   <tbody>
                     {products.map(product => (
                       <tr key={product._id}>
+                        {/* Células editáveis quando em modo de edição */}
                         <td>
                           {editingId === product._id ? (
                             <input
@@ -309,6 +322,7 @@ const Storage = ({ onBack }) => {
                           )}
                         </td>
                         <td>
+                          {/* Botões de ação: editar/salvar e deletar */}
                           <div style={{ display: 'flex', gap: '8px' }}>
                             {editingId === product._id ? (
                               <button
@@ -346,6 +360,7 @@ const Storage = ({ onBack }) => {
         </div>
       </div>
 
+      {/* Modal para adicionar novo produto */}
       {showAddModal && (
         <div 
           className="modal-overlay" 
@@ -366,6 +381,7 @@ const Storage = ({ onBack }) => {
               </button>
             </div>
             
+            {/* Formulário do novo produto */}
             <div className="form-group">
               <label className="form-label">Product Name *</label>
               <input

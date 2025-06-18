@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Sales = require("../models/Sales");
 
+// Busca vendas com filtros opcionais (status, produto, cliente, período)
 router.get("/", async (req, res) => {
   try {
     const { status, productId, customerId, startDate, endDate } = req.query;
@@ -16,24 +17,26 @@ router.get("/", async (req, res) => {
       if (endDate) query.timestamp.$lte = new Date(endDate);
     }
 
+    // Busca e ordena vendas por data decrescente
     const sales = await Sales.find(query).sort({ timestamp: -1 });
     res.json(sales);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
 
+// Busca vendas por cliente, com status opcional, e retorna estatísticas resumidas
 router.get("/user/:customerId", async (req, res) => {
   try {
     const { customerId } = req.params;
     const { status } = req.query;
-    
+
     let query = { customerId };
     if (status) query.status = status;
 
     const sales = await Sales.find(query).sort({ timestamp: -1 });
 
+    // Estatísticas básicas da compra
     const stats = {
       totalOrders: sales.length,
       totalSpent: sales.reduce((sum, sale) => sum + sale.totalPrice, 0),
@@ -43,53 +46,40 @@ router.get("/user/:customerId", async (req, res) => {
 
     res.json({ sales, stats });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
+
+// Busca venda específica pelo ID
 router.get("/:id", async (req, res) => {
   try {
     const sale = await Sales.findById(req.params.id);
-    
+
     if (!sale) {
       return res.status(404).json({ message: 'Venda não encontrada' });
     }
 
     res.json(sale);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
+
+// Cria nova venda com validação básica dos dados
 router.post('/', async (req, res) => {
   try {
-    const { 
-      productId, 
-      productName, 
-      quantity, 
-      unitPrice, 
-      username, 
-      password, 
-      customerId,
-      status 
-    } = req.body;
+    const { productId, productName, quantity, unitPrice, username, password, customerId, status } = req.body;
 
     if (!productId || !productName || !quantity || !unitPrice || !username || !password) {
-      return res.status(400).json({ 
-        message: "Campos obrigatórios: productId, productName, quantity, unitPrice, username, password" 
-      });
+      return res.status(400).json({ message: "Campos obrigatórios: productId, productName, quantity, unitPrice, username, password" });
     }
 
     if (quantity <= 0 || unitPrice < 0) {
-      return res.status(400).json({ 
-        message: "Quantidade deve ser maior que 0 e preço não pode ser negativo" 
-      });
+      return res.status(400).json({ message: "Quantidade deve ser maior que 0 e preço não pode ser negativo" });
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ 
-        message: "Senha deve ter pelo menos 6 caracteres" 
-      });
+      return res.status(400).json({ message: "Senha deve ter pelo menos 6 caracteres" });
     }
 
     const totalPrice = quantity * unitPrice;
@@ -108,36 +98,29 @@ router.post('/', async (req, res) => {
     });
 
     const savedSale = await sale.save();
-    
-    console.log('Venda criada com sucesso:', savedSale._id);
-    
+
     res.status(201).json({
       message: 'Venda criada com sucesso',
       sale: savedSale
     });
 
   } catch (error) {
-    console.error('Erro ao criar venda:', error);
-    res.status(500).json({ 
-      message: 'Erro interno do servidor',
-      error: error.message 
-    });
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
+
+// Atualiza venda por ID, recalculando totalPrice se quantidade ou preço mudarem
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
+
     if (updateData.quantity !== undefined && updateData.quantity <= 0) {
-      return res.status(400).json({ 
-        message: "Quantidade deve ser maior que 0" 
-      });
+      return res.status(400).json({ message: "Quantidade deve ser maior que 0" });
     }
 
     if (updateData.unitPrice !== undefined && updateData.unitPrice < 0) {
-      return res.status(400).json({ 
-        message: "Preço não pode ser negativo" 
-      });
+      return res.status(400).json({ message: "Preço não pode ser negativo" });
     }
 
     const existingSale = await Sales.findById(id);
@@ -161,21 +144,17 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Venda não encontrada' });
     }
 
-    console.log('Venda atualizada:', updatedSale._id);
-    
     res.json({
       message: 'Venda atualizada com sucesso',
       sale: updatedSale
     });
 
   } catch (error) {
-    console.error('Erro ao atualizar venda:', error);
-    res.status(500).json({ 
-      message: 'Erro interno do servidor',
-      error: error.message 
-    });
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
+
+// Deleta venda por ID
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -186,32 +165,26 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Venda não encontrada' });
     }
 
-    console.log('Venda deletada:', deletedSale._id);
-    
     res.json({
       message: 'Venda deletada com sucesso',
       sale: deletedSale
     });
 
   } catch (error) {
-    console.error('Erro ao deletar venda:', error);
-    res.status(500).json({ 
-      message: 'Erro interno do servidor',
-      error: error.message 
-    });
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
+
+// Atualiza somente o status da venda por ID, com validação dos status permitidos
 router.patch('/:id/status', async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
     const validStatuses = ['pending', 'processing', 'completed', 'cancelled'];
-    
+
     if (!status || !validStatuses.includes(status)) {
-      return res.status(400).json({ 
-        message: `Status deve ser um dos seguintes: ${validStatuses.join(', ')}` 
-      });
+      return res.status(400).json({ message: `Status deve ser um dos seguintes: ${validStatuses.join(', ')}` });
     }
 
     const updatedSale = await Sales.findByIdAndUpdate(
@@ -224,21 +197,17 @@ router.patch('/:id/status', async (req, res) => {
       return res.status(404).json({ message: 'Venda não encontrada' });
     }
 
-    console.log('Status da venda atualizado:', updatedSale._id, 'para', status);
-    
     res.json({
       message: 'Status atualizado com sucesso',
       sale: updatedSale
     });
 
   } catch (error) {
-    console.error('Erro ao atualizar status:', error);
-    res.status(500).json({ 
-      message: 'Erro interno do servidor',
-      error: error.message 
-    });
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
   }
 });
+
+// Retorna estatísticas gerais de vendas (filtros opcionais por data)
 router.get('/stats/general', async (req, res) => {
   try {
     const { startDate, endDate } = req.query;
@@ -252,11 +221,11 @@ router.get('/stats/general', async (req, res) => {
 
     const sales = await Sales.find(query);
 
+    // Calcula métricas agregadas das vendas
     const stats = {
       totalSales: sales.length,
       totalRevenue: sales.reduce((sum, sale) => sum + sale.totalPrice, 0),
-      averageOrderValue: sales.length > 0 ? 
-        sales.reduce((sum, sale) => sum + sale.totalPrice, 0) / sales.length : 0,
+      averageOrderValue: sales.length > 0 ? sales.reduce((sum, sale) => sum + sale.totalPrice, 0) / sales.length : 0,
       statusBreakdown: {
         pending: sales.filter(sale => sale.status === 'pending').length,
         processing: sales.filter(sale => sale.status === 'processing').length,
@@ -274,13 +243,14 @@ router.get('/stats/general', async (req, res) => {
 
     res.json(stats);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
+
+// Função auxiliar para identificar os 10 produtos com maior receita
 function getTopProducts(sales) {
   const productStats = {};
-  
+
   sales.forEach(sale => {
     if (!productStats[sale.productId]) {
       productStats[sale.productId] = {
@@ -291,15 +261,15 @@ function getTopProducts(sales) {
         salesCount: 0
       };
     }
-    
+
     productStats[sale.productId].totalQuantity += sale.quantity;
     productStats[sale.productId].totalRevenue += sale.totalPrice;
     productStats[sale.productId].salesCount += 1;
   });
-  
+
   return Object.values(productStats)
     .sort((a, b) => b.totalRevenue - a.totalRevenue)
-    .slice(0, 10); 
+    .slice(0, 10);
 }
 
 module.exports = router;

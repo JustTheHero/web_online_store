@@ -1,4 +1,3 @@
-/* Sales Management CSS */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -114,7 +113,6 @@
     color: white !important;
   }
   
-  /* Stats Container */
   .stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -153,7 +151,6 @@
     text-shadow: 0 0 5px rgba(0, 191, 255, 0.3);
   }
   
-  /* Filters */
   .filters-container {
     display: flex;
     gap: 1rem;
@@ -182,7 +179,6 @@
     box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
   }
   
-  /* Sales Content */
   .sales-content {
     padding: 1.5rem;
   }
@@ -318,7 +314,6 @@
     font-size: 0.9rem;
   }
   
-  /* Details Modal */
   .details-grid {
     display: grid;
     gap: 1rem;
@@ -389,7 +384,6 @@
     border-color: #ef4444;
   }
   
-  /* Animations */
   .animate-spin {
     animation: spin 1s linear infinite;
   }
@@ -403,7 +397,6 @@
     }
   }
   
-  /* Loading State */
   .loading-container {
     display: flex;
     justify-content: center;
@@ -414,7 +407,6 @@
     color: #e6e6e6;
   }
   
-  /* Responsive Design */
   @media (max-width: 1200px) {
     .sales-container {
       padding: 15px;
@@ -505,7 +497,6 @@
     }
   }
   
-  /* Scrollbar Styling */
   .table-container::-webkit-scrollbar,
   .modal-content::-webkit-scrollbar {
     width: 8px;

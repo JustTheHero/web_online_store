@@ -19,14 +19,15 @@ const UserAccount = () => {
   const navigate = useNavigate();
   const { user, loading, isAuthenticated, logout, updateUser, requireAuth } = useAuth();
   
-  const [activeSection, setActiveSection] = useState('profile');
-  const [showReviewModal, setShowReviewModal] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  // Estados principais do componente
+  const [activeSection, setActiveSection] = useState('profile'); // Seção ativa do menu
+  const [showReviewModal, setShowReviewModal] = useState(false); // Controla modal de avaliação
+  const [selectedOrder, setSelectedOrder] = useState(null); // Pedido selecionado para avaliar
   const [reviewData, setReviewData] = useState({
     rating: 0,
     comment: ''
   });
-  const [userOrders, setUserOrders] = useState([]);
+  const [userOrders, setUserOrders] = useState([]); // Lista de pedidos do usuário
   const [loadingOrders, setLoadingOrders] = useState(false);
   const [userData, setUserData] = useState({
     nome: "",
@@ -34,6 +35,7 @@ const UserAccount = () => {
     discord: ""
   });
 
+  // Carrega dados do usuário e pedidos quando componente monta
   useEffect(() => {
     if (!loading && !requireAuth()) {
       return;
@@ -49,6 +51,7 @@ const UserAccount = () => {
     }
   }, [user, loading]);
 
+  // Busca pedidos do usuário na API
   const loadUserOrders = async () => {
     if (!user) return;
     
@@ -58,6 +61,7 @@ const UserAccount = () => {
       if (response.ok) {
         const sales = await response.json();
         
+        // Verifica se cada pedido já foi avaliado
         const salesWithReviewStatus = await Promise.all(
           sales.map(async (sale) => {
             try {
@@ -81,6 +85,7 @@ const UserAccount = () => {
           })
         );
         
+        // Formata dados para exibição
         const formattedOrders = salesWithReviewStatus.map(sale => ({
           id: sale._id,
           date: new Date(sale.timestamp).toISOString().split('T')[0],
@@ -101,11 +106,14 @@ const UserAccount = () => {
       setLoadingOrders(false);
     }
   };
+
+  // Handlers para formulário de perfil
   const handleChange = (e) => {
     const { id, value } = e.target;
     setUserData(prev => ({ ...prev, [id]: value }));
   };
 
+  // Salva alterações do perfil
   const handleSave = async () => {
     if (!user) return;
     
@@ -145,6 +153,7 @@ const UserAccount = () => {
     navigate('/loginSection');
   };
 
+  // Abre modal de avaliação para pedido específico
   const handleWriteReview = (order) => {
     if (!order.canReview) {
       alert("You can only review completed orders!");
@@ -155,12 +164,14 @@ const UserAccount = () => {
     setShowReviewModal(true);
   };
 
+  // Fecha modal de avaliação
   const handleCloseModal = () => {
     setShowReviewModal(false);
     setSelectedOrder(null);
     setReviewData({ rating: 0, comment: '' });
   };
 
+  // Handlers para sistema de avaliação
   const handleStarClick = (rating) => {
     setReviewData(prev => ({ ...prev, rating }));
   };
@@ -169,6 +180,7 @@ const UserAccount = () => {
     setReviewData(prev => ({ ...prev, comment: e.target.value }));
   };
 
+  // Envia avaliação para API
   const handleSubmitReview = async () => {
     if (reviewData.rating === 0) {
       alert("Please select a rating!");
@@ -196,7 +208,7 @@ const UserAccount = () => {
         const result = await response.json();
         alert(`Review submitted successfully! Rating: ${reviewData.rating} stars`);
         handleCloseModal();
-        loadUserOrders();
+        loadUserOrders(); // Recarrega pedidos para atualizar status de avaliação
       } else {
         const errorData = await response.json();
         alert(`Error submitting review: ${errorData.message}`);
@@ -207,7 +219,7 @@ const UserAccount = () => {
     }
   };
   
-
+  // Configuração do menu lateral - adminOnly define se item é só para admin
   const menuItems = [
     { id: 'profile', label: 'Account Settings', icon: Settings, adminOnly: false },
     { id: 'orders', label: 'My Orders', icon: Package, adminOnly: false },
@@ -216,6 +228,7 @@ const UserAccount = () => {
     { id: 'sales', label: 'Sales Management', icon: ShoppingCart, adminOnly: true },
   ];
 
+  // Define classe CSS baseada no status do pedido
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case 'delivered':
@@ -231,6 +244,7 @@ const UserAccount = () => {
     }
   };
 
+  // Renderiza conteúdo baseado na seção ativa
   const renderContent = () => {
     switch (activeSection) {
       case 'profile':
@@ -240,6 +254,7 @@ const UserAccount = () => {
               <h2 className="card-title">User Profile</h2>
             </div>
             <div className="card-content">
+              {/* Formulário de edição do perfil */}
               <div className="form-group">
                 <label htmlFor="nome" className="form-label">Name</label>
                 <input
@@ -279,10 +294,7 @@ const UserAccount = () => {
               </div>
               
               <div className="form-actions">
-                <button
-                  className="btn"
-                  onClick={handleSave}
-                >
+                <button className="btn" onClick={handleSave}>
                   <Save className="button-icon" />
                   Save Changes
                 </button>
@@ -315,6 +327,7 @@ const UserAccount = () => {
                   </div>
                 ) : (
                   <div className="orders-list">
+                    {/* Lista de pedidos do usuário */}
                     {userOrders.map(order => (
                       <div key={order.id} className="order-item">
                         <div className="order-header">
@@ -329,6 +342,7 @@ const UserAccount = () => {
                             <span className="order-date">{order.date}</span>
                             <span className="order-total">{order.total}</span>
                           </div>
+                          {/* Botão de avaliação aparece apenas para pedidos elegíveis */}
                           {order.canReview && (
                             <button
                               className="review-button"
@@ -346,6 +360,7 @@ const UserAccount = () => {
               </div>
             </div>
              
+            {/* Modal de avaliação */}
             {showReviewModal && (
               <div className="modal-overlay">
                 <div className="modal-content">
@@ -362,6 +377,7 @@ const UserAccount = () => {
                       <p className="review-order-date">Order Date: {selectedOrder?.date}</p>
                     </div>
                      
+                    {/* Sistema de classificação por estrelas */}
                     <div className="rating-section">
                       <label className="rating-label">Rating *</label>
                       <div className="stars-container">
@@ -403,6 +419,7 @@ const UserAccount = () => {
           </>
         );
        
+      // Seções administrativas - apenas redirecionam para outras páginas
       case 'clients':
         return (
           <div className="card">
@@ -418,7 +435,7 @@ const UserAccount = () => {
             </div>
           </div>
         );
-       
+       //modal de storage
       case 'storage':
         return (
           <div className="card">
@@ -434,7 +451,7 @@ const UserAccount = () => {
             </div>
           </div>
         );
-       
+       //modal de sales
       case 'sales':
         return (
           <div className="card">
@@ -456,6 +473,7 @@ const UserAccount = () => {
     }
   };
 
+  // Estados de carregamento e autenticação
   if (loading) {
     return (
       <div className="user-account-container">
@@ -474,6 +492,7 @@ const UserAccount = () => {
     <div className="user-account-container">
       <div className="container">
         <div className="content-wrapper">
+          {/* Menu lateral */}
           <div className="sidebar">
             <div className="card">
               <div className="card-header">
@@ -485,6 +504,7 @@ const UserAccount = () => {
               <div className="card-content2">
                 {menuItems.map(item => {
                   const IconComponent = item.icon;
+                  // Oculta itens administrativos para usuários comuns
                   if (item.adminOnly && !user.isAdmin) {
                     return null;
                   }
@@ -504,6 +524,7 @@ const UserAccount = () => {
             </div>
           </div>
              
+          {/* Conteúdo principal */}
           <div className="main-content">
             {renderContent()}
           </div>

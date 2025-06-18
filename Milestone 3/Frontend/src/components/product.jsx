@@ -4,8 +4,10 @@ import ProductCard from './productCard';
 import ApiService from '../data/api.js';
 
 const Products = () => {
+  // Estado para armazenar lista de produtos
   const [products, setProducts] = useState([]);
 
+  // Busca produtos da API ao montar o componente
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -19,11 +21,11 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-
   return (
     <section className="products">
       <div className="container_products">
         <h2>Products</h2>
+        {/* Grid de produtos usando ProductCard para cada item */}
         <div className="grid_products">
           {products.map(product => (
             <ProductCard key={product.id} product={product} />

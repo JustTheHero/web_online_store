@@ -136,7 +136,6 @@
     box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
 }
 
-/* Responsividade */
 @media (max-width: 900px) {
     .product_content {
         grid-template-columns: 1fr;

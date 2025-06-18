@@ -1,13 +1,16 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
+// Criação do contexto para o carrinho
 const CartContext = createContext();
 
+// Função reducer para gerenciar o estado do carrinho
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM': {
       const { productId, quantity, product } = action.payload;
       const existingItemIndex = state.items.findIndex(item => item.productId === productId);
-      
+
+      // Atualiza item existente ou adiciona novo
       if (existingItemIndex !== -1) {
         const updatedItems = [...state.items];
         updatedItems[existingItemIndex] = {
@@ -15,11 +18,7 @@ const cartReducer = (state, action) => {
           quantity: updatedItems[existingItemIndex].quantity + quantity,
           updatedAt: new Date().toISOString()
         };
-        
-        return {
-          ...state,
-          items: updatedItems
-        };
+        return { ...state, items: updatedItems };
       } else {
         const newItem = {
           productId,
@@ -28,14 +27,10 @@ const cartReducer = (state, action) => {
           addedAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         };
-        
-        return {
-          ...state,
-          items: [...state.items, newItem]
-        };
+        return { ...state, items: [...state.items, newItem] };
       }
     }
-    
+
     case 'REMOVE_ITEM': {
       const { productId } = action.payload;
       return {
@@ -43,89 +38,65 @@ const cartReducer = (state, action) => {
         items: state.items.filter(item => item.productId !== productId)
       };
     }
-    
+
     case 'UPDATE_QUANTITY': {
       const { productId, quantity } = action.payload;
-      
       if (quantity <= 0) {
         return {
           ...state,
           items: state.items.filter(item => item.productId !== productId)
         };
       }
-      
       const updatedItems = state.items.map(item =>
         item.productId === productId
-          ? { 
-              ...item, 
-              quantity,
-              updatedAt: new Date().toISOString()
-            }
+          ? { ...item, quantity, updatedAt: new Date().toISOString() }
           : item
       );
-      
-      return {
-        ...state,
-        items: updatedItems
-      };
+      return { ...state, items: updatedItems };
     }
-    
+
     case 'UPDATE_PRODUCT_DATA': {
       const { productId, productData } = action.payload;
       const updatedItems = state.items.map(item =>
         item.productId === productId
-          ? { 
-              ...item, 
-              product: { ...item.product, ...productData },
-              updatedAt: new Date().toISOString()
-            }
+          ? { ...item, product: { ...item.product, ...productData }, updatedAt: new Date().toISOString() }
           : item
       );
-      
-      return {
-        ...state,
-        items: updatedItems
-      };
+      return { ...state, items: updatedItems };
     }
-    
+
     case 'CLEAR_CART':
-      return {
-        ...state,
-        items: []
-      };
-    
+      return { ...state, items: [] };
+
     case 'LOAD_CART': {
       const { items } = action.payload;
-      return {
-        ...state,
-        items: Array.isArray(items) ? items : []
-      };
+      return { ...state, items: Array.isArray(items) ? items : [] };
     }
+
     default:
       return state;
   }
 };
 
+// Estado inicial do carrinho
 const initialState = {
   items: [],
   lastSync: null
 };
 
+// Componente provedor do carrinho
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+  // Carrega carrinho do localStorage na inicialização
   useEffect(() => {
     const loadCartFromStorage = () => {
       try {
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
           const parsedCart = JSON.parse(savedCart);
-          
           if (parsedCart && Array.isArray(parsedCart.items)) {
-            dispatch({
-              type: 'LOAD_CART',
-              payload: parsedCart
-            });
+            dispatch({ type: 'LOAD_CART', payload: parsedCart });
           }
         }
       } catch (error) {
@@ -133,10 +104,10 @@ export const CartProvider = ({ children }) => {
         localStorage.removeItem('cart');
       }
     };
-
     loadCartFromStorage();
   }, []);
 
+  // Salva carrinho no localStorage sempre que o estado mudar
   useEffect(() => {
     try {
       const cartData = {
@@ -150,17 +121,14 @@ export const CartProvider = ({ children }) => {
     }
   }, [state]);
 
+  // Funções utilitárias para manipular o carrinho
+
   const addToCart = async (productId, quantity, product) => {
     try {
       if (!productId || !product || quantity <= 0) {
         throw new Error('Invalid data to add to cart');
       }
-
-      dispatch({
-        type: 'ADD_ITEM',
-        payload: { productId, quantity, product }
-      });
-      
+      dispatch({ type: 'ADD_ITEM', payload: { productId, quantity, product } });
       return true;
     } catch (error) {
       console.error(error);
@@ -170,29 +138,17 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (productId) => {
     if (!productId) return;
-    
-    dispatch({
-      type: 'REMOVE_ITEM',
-      payload: { productId }
-    });
+    dispatch({ type: 'REMOVE_ITEM', payload: { productId } });
   };
 
   const updateQuantity = (productId, quantity) => {
     if (!productId || quantity < 0) return;
-    
-    dispatch({
-      type: 'UPDATE_QUANTITY',
-      payload: { productId, quantity }
-    });
+    dispatch({ type: 'UPDATE_QUANTITY', payload: { productId, quantity } });
   };
 
   const updateProductData = (productId, productData) => {
     if (!productId || !productData) return;
-    
-    dispatch({
-      type: 'UPDATE_PRODUCT_DATA',
-      payload: { productId, productData }
-    });
+    dispatch({ type: 'UPDATE_PRODUCT_DATA', payload: { productId, productData } });
   };
 
   const clearCart = () => {
@@ -200,16 +156,14 @@ export const CartProvider = ({ children }) => {
   };
 
   const getTotalItems = () => {
-    return state.items.reduce((total, item) => {
-      return total + (item.quantity || 0);
-    }, 0);  
+    return state.items.reduce((total, item) => total + (item.quantity || 0), 0);
   };
 
   const getTotalPrice = () => {
     return state.items.reduce((total, item) => {
       const price = item.product?.price || 0;
       const quantity = item.quantity || 0;
-      return total + (price * quantity);
+      return total + price * quantity;
     }, 0);
   };
 
@@ -227,22 +181,18 @@ export const CartProvider = ({ children }) => {
   };
 
   const validateCart = () => {
-    const validItems = state.items.filter(item => {
-      return item.productId && 
-             item.product && 
-             item.quantity > 0;
-    });
+    const validItems = state.items.filter(item =>
+      item.productId && item.product && item.quantity > 0
+    );
 
     if (validItems.length !== state.items.length) {
-      dispatch({
-        type: 'LOAD_CART',
-        payload: { items: validItems }
-      });
+      dispatch({ type: 'LOAD_CART', payload: { items: validItems } });
     }
 
     return validItems;
   };
 
+  // Valor exposto pelo contexto
   const value = {
     items: state.items,
     lastSync: state.lastSync,
@@ -266,12 +216,11 @@ export const CartProvider = ({ children }) => {
   );
 };
 
+// Hook personalizado para consumir o carrinho
 export const useCart = () => {
   const context = useContext(CartContext);
-  
   if (!context) {
     throw new Error('useCart must be used inside a CartProvider');
   }
-  
   return context;
 };

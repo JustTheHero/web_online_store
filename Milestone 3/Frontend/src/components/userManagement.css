@@ -77,12 +77,11 @@
   table-layout: auto;
 }
 
-/* Definindo larguras das colunas */
-.table th:nth-child(1) { width: 18%; } /* Name */
-.table th:nth-child(2) { width: 30%; } /* Email */
-.table th:nth-child(3) { width: 18%; } /* Discord */
-.table th:nth-child(4) { width: 12%; } /* Role */
-.table th:nth-child(5) { width: 22%; } /* Actions */
+.table th:nth-child(1) { width: 18%; }
+.table th:nth-child(2) { width: 30%; }
+.table th:nth-child(3) { width: 18%; }
+.table th:nth-child(4) { width: 12%; }
+.table th:nth-child(5) { width: 22%; }
 
 .table-header {
   background-color: #162B45;
@@ -114,7 +113,6 @@
   vertical-align: middle;
 }
 
-/* Permitir quebra de linha para emails longos */
 .table-cell[data-label="Email"] {
   word-break: break-word;
   overflow-wrap: break-word;
@@ -295,7 +293,6 @@
   margin-top: 1.5rem;
 }
 
-/* Responsividade para tablets */
 @media (max-width: 1024px) {
   .scroll-indicator {
     display: block;
@@ -306,7 +303,6 @@
   }
 }
 
-/* Responsividade para mobile */
 @media (max-width: 768px) {
   .user-management-container {
     padding: 1rem 0.5rem;
@@ -395,7 +391,7 @@
   }
   
   .btn-text {
-    display: none; /* Esconder texto dos botões em telas muito pequenas */
+    display: none;
   }
   
   .modal-content {
@@ -479,7 +475,6 @@
   }
 }
 
-/* Melhorar a experiência de scroll em dispositivos touch */
 @media (hover: none) and (pointer: coarse) {
   .table-wrapper {
     -webkit-overflow-scrolling: touch;
@@ -497,12 +492,9 @@
   }
 }
 
-/* Garantir que o scroll horizontal funcione corretamente em todos os navegadores */
 .table-wrapper {
   scrollbar-width: auto;
 }
-
-/* Indicador visual quando há conteúdo para rolar */
 @media (max-width: 1024px) {
   .table-container::before {
     content: "";

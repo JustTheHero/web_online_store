@@ -1,22 +1,16 @@
-/* CSS ATUALIZADO PARA O ITEM DO CARRINHO
-  Substitua ou adicione estas regras ao seu arquivo de estilo.
-*/
-
-/* Contêiner principal do card do item */
 .cart_item {
-    display: flex; /* Cria o layout de colunas */
-    gap: 1rem; /* Espaço entre a imagem e o bloco de informações */
-    background-color: #1f2937; /* Cor de fundo do card */
+    display: flex;
+    gap: 1rem;
+    background-color: #1f2937;
     padding: 1rem;
     border-radius: 8px;
     border: 1px solid #374151;
 }
 
-/* Coluna 1: Imagem */
 .item_image {
     width: 80px;
     height: 80px;
-    flex-shrink: 0; /* Impede que a imagem encolha */
+    flex-shrink: 0;
     background-color: #fff;
     border-radius: 6px;
     display: flex;
@@ -30,22 +24,19 @@
     object-fit: contain;
 }
 
-/* Coluna 2: Wrapper de Informações */
 .item_info_wrapper {
     display: flex;
-    flex-direction: column; /* Empilha o texto e o botão verticalmente */
-    justify-content: space-between; /* EMPURRA O BOTÃO PARA BAIXO! */
-    flex-grow: 1; /* Faz esta coluna ocupar todo o espaço restante */
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
-/* Bloco superior com os textos */
 .item_text_details {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem; /* Pequeno espaço entre as linhas de texto */
+    gap: 0.25rem;
 }
 
-/* Estilização dos textos */
 .item_name {
     font-size: 1rem;
     font-weight: 600;
@@ -56,7 +47,7 @@
 .item_price,
 .item_quantity_text,
 .item_total {
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem;
     color: #9ca3af;
     margin: 0;
 }
@@ -66,28 +57,22 @@
     color: #d1d5db;
 }
 
-/* Bloco inferior com as ações (botão) */
 .item_actions {
-    margin-top: 0.5rem; /* Espaço entre o texto e o botão */
+    margin-top: 0.5rem;
 }
-
-/*
-  ESTILIZAÇÃO ESPECÍFICA DO BOTÃO REMOVER
-  Isso vai sobrescrever o estilo padrão da classe .btn apenas para este botão.
-*/
 .remove_btn {
-    background-color: #ef4444; /* Vermelho */
+    background-color: #ef4444;
     color: white;
     border: none;
     font-size: 0.8rem;
     font-weight: 500;
     padding: 6px 12px;
     border-radius: 5px;
-    text-transform: none; /* Remove o 'uppercase' se houver */
+    text-transform: none;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .remove_btn:hover {
-    background-color: #dc2626; /* Vermelho mais escuro no hover */
+    background-color: #dc2626;
 }

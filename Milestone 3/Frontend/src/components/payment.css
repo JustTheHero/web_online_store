@@ -23,19 +23,6 @@
     gap: 2rem;
 }
 
-.back_btn {
-    background-color: transparent;
-    border: 1px solid #00BFFF;
-    color: #00BFFF;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.back_btn:hover {
-    background-color: rgba(0, 191, 255, 0.1);
-}
 
 .payment_summary {
     background-color: #21262d;
@@ -332,19 +319,6 @@
     gap: 2rem;
 }
 
-.back_btn {
-    background-color: transparent;
-    border: 1px solid #00BFFF;
-    color: #00BFFF;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.back_btn:hover {
-    background-color: rgba(0, 191, 255, 0.1);
-}
 
 .payment_summary {
     background-color: #21262d;

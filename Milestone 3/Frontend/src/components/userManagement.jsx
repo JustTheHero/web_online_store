@@ -3,18 +3,21 @@ import { Shield, ShieldCheck, Trash2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 
 const UserManagement = ({ onBack }) => {
+  // Estados para gerenciar dados e UI
   const [users, setUsers] = useState([]);
-  const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(null); // ID do usuário a ser deletado
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user: currentUser, requireAdmin } = useAuth();
   
+  // Verificação de permissão admin na montagem do componente
   useEffect(() => {
     if (!requireAdmin()) {
       return;
     }
   }, [requireAdmin]);
 
+  // Toast simples para feedback ao usuário
   const toast = {
     success: (message) => {
       console.log('Success:', message);
@@ -26,6 +29,7 @@ const UserManagement = ({ onBack }) => {
     }
   };
 
+  // Busca todos os usuários da API
   const fetchUsers = async () => {
     try {
       setLoading(true);
@@ -40,7 +44,7 @@ const UserManagement = ({ onBack }) => {
 
       if (response.ok) {
         const userData = await response.json();
-        // Transformar dados para o formato esperado pelo componente
+        // Transforma dados da API para formato do componente
         const formattedUsers = userData.map(user => ({
           id: user._id,
           name: user.nome,
@@ -63,15 +67,18 @@ const UserManagement = ({ onBack }) => {
     }
   };
 
+  // Carrega usuários na inicialização
   useEffect(() => {
     fetchUsers();
   }, []);
   
+  // Alterna privilégios de admin do usuário
   const handleToggleAdmin = async (id) => {
     try {
       const userToUpdate = users.find(u => u.id === id);
       if (!userToUpdate) return;
 
+      // Impede que admin remova seus próprios privilégios
       if (userToUpdate.id === currentUser?.id && userToUpdate.isAdmin) {
         toast.error('you can\'t remove your own admin privileges');
         return;
@@ -88,7 +95,7 @@ const UserManagement = ({ onBack }) => {
       });
 
       if (response.ok) {
-        // Atualizar o estado local
+        // Atualiza estado local
         setUsers(users.map(user => 
           user.id === id ? { ...user, isAdmin: !user.isAdmin } : user
         ));
@@ -103,9 +110,11 @@ const UserManagement = ({ onBack }) => {
     }
   };
   
+  // Abre modal de confirmação para deletar usuário
   const handleConfirmDelete = (id) => {
     const userToDelete = users.find(u => u.id === id);
     
+    // Impede auto-exclusão
     if (userToDelete?.id === currentUser?.id) {
       toast.error('you can\'t delete your own account');
       return;
@@ -114,6 +123,7 @@ const UserManagement = ({ onBack }) => {
     setDeleteConfirm(id);
   };
   
+  // Executa a exclusão do usuário
   const handleDeleteUser = async () => {
     if (!deleteConfirm) return;
 
@@ -143,6 +153,7 @@ const UserManagement = ({ onBack }) => {
     setDeleteConfirm(null);
   };
 
+  // Navegação de volta
   const handleBack = () => {
     if (onBack && typeof onBack === 'function') {
       onBack();
@@ -151,6 +162,7 @@ const UserManagement = ({ onBack }) => {
     }
   };
 
+  // Estados de loading e erro
   if (loading) {
     return (
       <div style={{
@@ -220,6 +232,7 @@ const UserManagement = ({ onBack }) => {
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
           width: '100%'
         }}>
+          {/* Header com botão voltar e título */}
           <div style={{
             padding: '1.5rem',
             borderBottom: '1px solid rgba(79, 211, 230, 0.2)',
@@ -250,6 +263,7 @@ const UserManagement = ({ onBack }) => {
             </div>
           </div>
           
+          {/* Tabela de usuários */}
           <div style={{
             padding: '1.5rem'
           }}>
@@ -328,6 +342,7 @@ const UserManagement = ({ onBack }) => {
                     {users.map(user => (
                       <tr key={user.id} style={{
                         borderTop: '1px solid rgba(79, 211, 230, 0.2)',
+                        // Destaca linha do usuário atual
                         backgroundColor: user.id === currentUser?.id ? 'rgba(79, 211, 230, 0.05)' : 'transparent'
                       }}>
                         <td style={{
@@ -336,6 +351,7 @@ const UserManagement = ({ onBack }) => {
                           wordWrap: 'break-word'
                         }}>
                           {user.name}
+                          {/* Indicador para usuário atual */}
                           {user.id === currentUser?.id && (
                             <span style={{
                               marginLeft: '0.5rem',
@@ -360,6 +376,7 @@ const UserManagement = ({ onBack }) => {
                           padding: '0.75rem',
                           fontSize: '0.875rem'
                         }}>
+                          {/* Badge de função do usuário */}
                           <span style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -378,11 +395,13 @@ const UserManagement = ({ onBack }) => {
                           padding: '0.75rem',
                           fontSize: '0.875rem'
                         }}>
+                          {/* Botões de ação */}
                           <div style={{
                             display: 'flex',
                             gap: '0.5rem',
                             flexWrap: 'wrap'
                           }}>
+                            {/* Botão toggle admin */}
                             <button
                               className="btn"
                               style={{
@@ -414,6 +433,7 @@ const UserManagement = ({ onBack }) => {
                                 {user.isAdmin ? "Remover Admin" : "Tornar Admin"}
                               </span>
                             </button>
+                            {/* Botão deletar usuário */}
                             <button
                               className="btn"
                               style={{
@@ -455,6 +475,7 @@ const UserManagement = ({ onBack }) => {
         </div>
       </div>
 
+      {/* Modal de confirmação de exclusão */}
       {deleteConfirm !== null && (
         <div style={{
           position: 'fixed',

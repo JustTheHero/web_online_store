@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Star, Trophy, Shield, User, Loader } from 'lucide-react';
 
 const Reviews = () => {
+  // Estados do componente
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
 
+  // Busca reviews da API quando componente monta
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -19,7 +21,6 @@ const Reviews = () => {
         }
         
         const data = await response.json();
-        
         setReviews(data.reviews || []);
         
       } catch (err) {
@@ -33,6 +34,7 @@ const Reviews = () => {
     fetchReviews();
   }, []);
 
+  // Filtra reviews baseado no filtro selecionado
   const filteredReviews = reviews.filter(review => {
     if (filter === 'all') return true;
     
@@ -40,6 +42,7 @@ const Reviews = () => {
     return productName.includes(filter.toLowerCase());
   });
 
+  // Renderiza estrelas baseado na avaliação
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
@@ -49,6 +52,7 @@ const Reviews = () => {
     ));
   };
 
+  // Retorna ícone baseado no tipo de serviço
   const getServiceIcon = (productName) => {
     const product = productName?.toLowerCase() || '';
     if (product.includes('boost') || product.includes('elo')) return <Trophy className="service-icon" />;
@@ -57,6 +61,7 @@ const Reviews = () => {
     return <Star className="service-icon" />;
   };
 
+  // Retorna label do serviço baseado no nome do produto
   const getServiceLabel = (productName) => {
     const product = productName?.toLowerCase() || '';
     if (product.includes('boost') || product.includes('elo')) return 'Elo Boost';
@@ -65,6 +70,7 @@ const Reviews = () => {
     return productName || 'Service';
   };
 
+  // Categoriza produto por jogo (função não usada no render atual)
   const getProductCategory = (productName) => {
     const product = productName?.toLowerCase() || '';
     if (product.includes('lol') || product.includes('league')) return 'League of Legends';
@@ -74,6 +80,7 @@ const Reviews = () => {
     return 'Gaming';
   };
 
+  // Estados de loading e erro
   if (loading) {
     return (
       <div className="reviews-container">
@@ -113,6 +120,7 @@ const Reviews = () => {
 
   return (
     <>
+      {/* CSS inline para estilização completa */}
       <style>{`
         .reviews-container {
           background-color: #0d1117;
@@ -389,6 +397,7 @@ const Reviews = () => {
       
       <div className="reviews-container">
         <div className="reviews-wrapper">
+          {/* Botões de filtro por categoria */}
           <div className="filter-buttons">
             {['all', 'boost', 'coach', 'account'].map((filterOption) => (
               <button
@@ -401,7 +410,7 @@ const Reviews = () => {
             ))}
           </div>
 
-
+          {/* Grid de reviews */}
           <div className="reviews-grid">
             {filteredReviews.length === 0 ? (
               <div style={{
@@ -415,6 +424,7 @@ const Reviews = () => {
             ) : (
               filteredReviews.map((review) => (
                 <div key={review._id} className="review-card">
+                  {/* Header do card com avatar e info do usuário */}
                   <div className="review-header">
                     <div className="customer-avatar">
                       {(review.userId?.email?.charAt(0) || 'U').toUpperCase()}
@@ -435,6 +445,7 @@ const Reviews = () => {
                     </div>
                   </div>
 
+                  {/* Rating com estrelas e data */}
                   <div className="review-rating">
                     <div className="stars-container">
                       {renderStars(review.rating)}
@@ -444,6 +455,7 @@ const Reviews = () => {
                     </span>
                   </div>
 
+                  {/* Comentário da review */}
                   {review.comment && (
                     <p className="review-comment">
                       "{review.comment}"

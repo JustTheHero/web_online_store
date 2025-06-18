@@ -20,7 +20,7 @@ import Reviews from './components/reviews.jsx';
 import SearchResults from './components/SearchResults.jsx';
 import { CartProvider } from './contexts/CartContext.jsx';
 import SalesManagement from './components/salesManagement.jsx';
-
+//set de rotas para o react router
 function App() {
   return (
     <CartProvider>
