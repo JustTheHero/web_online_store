@@ -78,12 +78,7 @@
 No comments.
 
 ## 4. Test Plan:
-* Back-end funcionalities will be tested using Postman.
-* For the Milestone 2 features, we considered using the Beeceptor API to perform tests with GET, POST, etc., requests to retrieve products and make purchases. However, due to the request limit on free accounts hindering development, the idea was not implemented.
-* Therefore, functionalities such as product retrieval, inventory and user management, review pages, and product purchases primarily use mock items to simulate the database. The main mocks, used in more than one component, are located in "/web/src/data/". Others are declared and used within their own component.
-* The management of users and inventory with mock items is not persistent; it only demonstrates the functionality of CRUD operations. These can be performed by admins through an "isAdmin" flag, which is always set to True for testing purposes.
-* Creating products and reviews does not update the respective mocks so they appear on their corresponding pages. It only demonstrates the functionality, which will work properly once the server is implemented, since mocks are static.
-* For the product purchase functionality, the "CartContext.jsx" component is used, located in "web/src/contexts". This component uses Hooks and the Context API to manage the global state of the shopping cart, ensuring consistency between the inventory and the cart contents. It handles item addition/removal and ensures the user cannot purchase more than the available stock, among other validations.
+* In milestone 3 all frontend tests were made again to ensure that there were no problems with the database integration. Many requests were made to the server, to secure the functionality of the website features with both valid and invalid data treatment. 
 
 ## 5. Test Results:
 * Category and specific product pages correctly filter from the product mock.
