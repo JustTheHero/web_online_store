@@ -75,6 +75,7 @@
    * All data related to storage, products, and users will be saved on a server.
 
 ## 3. Code Comments:
+No comments.
 
 ## 4. Test Plan:
 * Back-end funcionalities will be tested using Postman.
@@ -141,7 +142,7 @@ npm run preview
 ```
 # The built application will be served at http://localhost:4173
 ## 7. Problems:
-* A user can buy a product without being logged in the current version.
+* No problems where found in the final version (Milestone 3).
 
 ## 8. Comments:
-* There is no user validation in the current version, this will be implemented in tthe backend. For test purposes all logged users have admin permissions.
+* No comments.
