@@ -98,6 +98,8 @@ Node.js (version 18 or higher recommended)
 npm or yarn package manager
 Git (for version control)
 
+The server sleeps by inativity, the first time you enter the site it will make an automatic request for all products.
+
 # Initial Setup
 Install Dependencies
 ```
@@ -114,7 +116,6 @@ Development Build ProcessStart Development Server
 #Start the development server with hot reloading
 npm run dev
 ```
-# The application will be available at http://localhost:5173
 Code Quality Checks
   ``` 
 #Run ESLint to check for code quality issues
@@ -139,7 +140,7 @@ Build verification
 #Preview the production build locally
 npm run preview
 ```
-# The built application will be served at http://localhost:4173
+
 ## 7. Problems:
 * No problems where found in the final version (Milestone 3).
 
