@@ -145,4 +145,4 @@ npm run preview
 * No problems where found in the final version (Milestone 3).
 
 ## 8. Comments:
-* No comments.
+* O acesso como ADM é dado por Usúario: juanmarquesjordao@hotmail.com Senha: 10101030
