@@ -126,10 +126,10 @@ const ProductDescription = () => {
             <div className="product_stock">
               <h3>Stock</h3>
               <p className={product.stock <= 5 ? 'low-stock' : ''}>
-                {product.stock > 0 ? `${product.stock} available${product.stock === 1 ? '' : 'is'}` : 'Out of stock'}
+                {product.stock > 0 ? `${product.stock} available` : 'Out of stock'}
                 {product.stock <= 5 && product.stock > 0 && (
                   <span className="stock-warning"> - Last units!</span>
-                )}
+                )}  
               </p>
             </div>
             

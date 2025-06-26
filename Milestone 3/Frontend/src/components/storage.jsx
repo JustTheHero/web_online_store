@@ -316,7 +316,7 @@ const Storage = ({ onBack }) => {
                               rows="2"
                             />
                           ) : (
-                            <div style={{ maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <div style={{ padding: '0.75rem', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                               {product.description || '-'}
                             </div>
                           )}
