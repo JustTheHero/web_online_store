@@ -179,4 +179,27 @@ router.get('/profile', async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ 
+      message: 'User deleted successfully', 
+      user: {
+        id: deletedUser._id,
+        nome: deletedUser.nome,
+        email: deletedUser.email
+      }
+    });
+
+  } catch (error) {
+    console.error('Erro ao deletar usuário:', error);
+    res.status(500).json({ message: 'Erro interno do servidor', error: error.message });
+  }
+});
+
 module.exports = router;

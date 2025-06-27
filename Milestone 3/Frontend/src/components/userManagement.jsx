@@ -126,7 +126,7 @@ const UserManagement = ({ onBack }) => {
   // Executa a exclusão do usuário
   const handleDeleteUser = async () => {
     if (!deleteConfirm) return;
-
+    console.log(deleteConfirm);
     try {
       const response = await fetch(`https://web-backend-owo8.onrender.com/api/users/${deleteConfirm}`, {
         method: 'DELETE',
